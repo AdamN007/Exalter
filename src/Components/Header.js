@@ -12,11 +12,12 @@ const Container = styled.div`
   font-family: 'Arapey', serif;
   font-style: italic;
   position: relative;
+  padding: 20px;
 `;
 
 const TitleDescription = styled.div`
   text-align: center;
-  font-size: 70px;
+  font-size: 75px;
 `;
 
 const Subtitle = styled.div`
@@ -27,18 +28,18 @@ const Subtitle = styled.div`
   -webkit-text-fill-color: transparent;
   background-clip: text;
   
-  transition: opacity 0.5s ease-in-out; // Smooth transition for opacity
-  opacity: ${props => props.opacity}; // Controlled by state
+  transition: opacity 0.5s ease-in-out; 
+  opacity: ${props => props.opacity}; 
 `;
 
 const Description = styled.div`
   font-family: 'Roboto', sans-serif;
-  line-height: 1.5; // Decrease line height for more compact lines
-  letter-spacing: 1px; // Slightly reduce space between characters
-  margin-top: 20px; // Add some space between the subtitle and the description
-  text-align: center; // Optionally center-align the text
-  max-width: 600px; // Set a maximum width for better readability
-  margin-left: auto; // These two lines center the block
+  line-height: 1.5; 
+  letter-spacing: 1px;
+  margin-top: 20px; 
+  text-align: center; 
+  max-width: 600px;
+  margin-left: auto; 
   margin-right: auto;
   font-size: 21px;
   font-weight: 300;
@@ -47,35 +48,35 @@ const Description = styled.div`
 
 const UnderlinedText = styled.span`
   text-decoration: underline;
-  text-decoration-thickness: 1px; // Adjust the thickness as needed
-  text-underline-offset: 3px; // Moves the underline down by 3px
+  text-decoration-thickness: 1px; 
+  text-underline-offset: 3px; 
 `;
 
 
 const Button3D = styled.button`
-  background-color: #E02424; // Slightly brighter red for button color
+  background-color: #E02424; 
   border: none;
-  padding: 18px 45px; // Padding for button size
-  font-size: 18px; // Independent font size
-  border-radius: 7px; // Rounded corners
+  padding: 18px 45px; 
+  font-size: 18px;
+  border-radius: 5px; 
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 30px;
+  margin-top: 45px;
 
-  // Shadow for 3D effect and additional shadow for elevation
+
   box-shadow: 
-    0 8px #B71C1C, // Inner shadow with a brighter red tone
-    0 10px 10px rgba(0, 0, 0, 0.5); // Outer shadow for elevation effect
+    0 8px #B71C1C, 
+    0 10px 10px rgba(0, 0, 0, 0.5); 
 
   &:hover {
-    background-color: #C62828; // A brighter red for hover effect
+    background-color: #C62828; 
   }
 
   &:active {
     box-shadow: 
-      0 4px #B71C1C, // Reduced inner shadow when pressed
-      0 5px 15px rgba(0, 0, 0, 0.5); // Slightly reduced outer shadow
-    transform: translateY(4px); // Button moves down when pressed
+      0 4px #B71C1C,
+      0 5px 15px rgba(0, 0, 0, 0.5); 
+    transform: translateY(4px); 
   }
 `;
 
@@ -85,21 +86,21 @@ const LineWithArrow = styled.div`
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 1px; // Width of the line
-  height: 120px; // Height of the line
-  background-color: black; // Color of the line
+  width: 1px;
+  height: 120px; 
+  background-color: black; 
 
  
 `;
 
 const ArrowIcon = styled(ArrowIosUpwardOutline)`
   position: absolute;
-  top: -6px; // Move the icon 10px upwards
+  top: -6px; 
   left: 50%;
   transform: translateX(-50%);
-  width: 16px; // Set your desired width
-  height: 16px; // Set your desired height
-  color: black; // Set the color of the icon
+  width: 16px; 
+  height: 16px; 
+  color: black; 
 `;
 
 
@@ -113,15 +114,15 @@ const Header = () => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setOpacity(0); // Fade out
+      setOpacity(0);
       setTimeout(() => {
         setCurrentWord((prevWord) => {
           let nextIndex = words.indexOf(prevWord) + 1;
           return words[nextIndex % words.length];
         });
-        setOpacity(1); // Fade in
-      }, 500); // Half the interval of the opacity transition
-    }, 3000); // Change word every 3 seconds
+        setOpacity(1); 
+      }, 500); 
+    }, 3000);
 
     return () => clearInterval(intervalId);
   }, []);
@@ -137,9 +138,7 @@ const Header = () => {
   An <UnderlinedText>acclaimed design and development agency</UnderlinedText> renowned for bringing highly innovative ideas to life <UnderlinedText>quickly enough to ward off any encroaching existential worries</UnderlinedText>.
 </Description>
     <Button3D>Learn More</Button3D>
-      <LineWithArrow>
-  <ArrowIcon />
-</LineWithArrow>
+    
     </Container>
   );
 };

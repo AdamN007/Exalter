@@ -2,23 +2,28 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Styled container for the Navbar
+
 const NavbarContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 120px;
-  padding: 0 60px; // Padding on both sides
-  
+  height: 90px;
+  padding: 0 60px;
+
   width: 100%;
-  box-sizing: border-box; // Include padding and border in the width calculation
+  box-sizing: border-box;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
+  background-color: transparent; 
+  backdrop-filter: blur(1px);
+
+
+  
 `;
 
-// Styled component for the Navbar links
 const NavbarLinks = styled.div`
   display: flex;
   gap: 40px;
@@ -37,7 +42,7 @@ const NavbarLinks = styled.div`
   }
 `;
 
-// Styled component for the Logo
+
 const Logo = styled.div`
   font-size: 55px;
   
