@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import Typed from 'typed.js';
 import { ArrowIosUpwardOutline } from '@styled-icons/evaicons-outline/ArrowIosUpwardOutline';
 
 
@@ -18,11 +19,17 @@ const Container = styled.div`
 const TitleDescription = styled.div`
   text-align: center;
   font-size: 75px;
+  @media (max-width: 1000px) {
+    font-size: 50px;
+  }
 `;
 
 const Subtitle = styled.div`
-  
+  min-height: 80px;
   font-size: 70px;
+  @media (max-width: 1000px) {
+    font-size: 50px;
+  }
   background: -webkit-linear-gradient(red, purple);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -43,13 +50,17 @@ const Description = styled.div`
   margin-right: auto;
   font-size: 21px;
   font-weight: 300;
-  
+  @media (max-width: 1000px) {
+    font-size: 18px;
+    max-width: 400px;
+  }
 `;
 
 const UnderlinedText = styled.span`
   text-decoration: underline;
   text-decoration-thickness: 1px; 
   text-underline-offset: 3px; 
+  
 `;
 
 
@@ -107,24 +118,22 @@ const ArrowIcon = styled(ArrowIosUpwardOutline)`
 
 
 const Header = () => {
-  const [currentWord, setCurrentWord] = useState('redefined');
-  const [opacity, setOpacity] = useState(1);
-  const words = ['Redefined', 'Reimagined', 'Revamped'];
-
+  const el = useRef(null);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setOpacity(0);
-      setTimeout(() => {
-        setCurrentWord((prevWord) => {
-          let nextIndex = words.indexOf(prevWord) + 1;
-          return words[nextIndex % words.length];
-        });
-        setOpacity(1); 
-      }, 500); 
-    }, 3000);
+    const typed = new Typed(el.current, {
+      strings: ['Redefined', 'Reimagined', 'Revamped'], // Add your words here
+      typeSpeed: 100,
+      backSpeed: 100,
+      backDelay: 1000,
+      smartBackspace: false,
+      showCursor: false,
+      loop: true,
+    });
 
-    return () => clearInterval(intervalId);
+    return () => {
+      typed.destroy();
+    };
   }, []);
 
   return (
@@ -133,7 +142,7 @@ const Header = () => {
         Design &<br />
         Development,
       </TitleDescription>
-      <Subtitle opacity={opacity}>{currentWord}</Subtitle>
+      <Subtitle ref={el}></Subtitle>
       <Description>
   An <UnderlinedText>acclaimed design and development agency</UnderlinedText> renowned for bringing highly innovative ideas to life <UnderlinedText>quickly enough to ward off any encroaching existential worries</UnderlinedText>.
 </Description>

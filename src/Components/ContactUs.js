@@ -28,6 +28,7 @@ const Input = styled.input`
   border: 1px solid black;
   border-radius: 20px;
   background-color: transparent;
+  
 
   &:last-child {
     margin-right: 0; 
@@ -49,7 +50,7 @@ const TextArea = styled.textarea`
 const Button3D = styled.button`
   background-color: #E02424;
   border: none;
-  padding: 18px 470px;
+  padding: 18px 40px;
   font-size: 20px; 
   border-radius: 5px; 
   cursor: pointer;
@@ -97,7 +98,8 @@ const ContactUs = () => {
       <ContactForm>
       
         <FieldContainer>
-          <Input type="text" placeholder="Name" />
+          {//<Input type="text" placeholder="Name" /> 
+          }
           <Input type="email" placeholder="Email" />
         </FieldContainer>
         <TextArea placeholder="Description"></TextArea>

@@ -7,13 +7,17 @@ padding-top: 200px;
 `;
 const BoxContainer = styled.div`
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
-  
-  padding: 0 140px; 
-  gap: 40px; 
+  padding: 0 140px;
+  gap: 40px;
   font-family: 'Roboto', sans-serif;
-  
+
+  // Media query for screen sizes less than 1000px
+  @media (max-width: 1000px) {
+    flex-direction: column; // Stack boxes vertically
+    padding: 0 20px; // Adjust padding for smaller screens
+  }
 `;
 
 const Box = styled.div`
@@ -24,9 +28,6 @@ const Box = styled.div`
   border-bottom: 2px solid black;
   border-left: 1px dashed black;
   border-right: 1px dashed black;
-
-  
- 
 `;
 
 
@@ -99,7 +100,9 @@ const Title = styled.div`
   font-size: 100px; 
  letter-spacing: 1px;
   text-align: center;
- 
+  @media (max-width: 1000px) {
+    font-size: 40px; 
+  } 
 
 `;
 
@@ -107,7 +110,12 @@ const SmallText = styled.div`
    text-align: center;
    font-size: 20px;
    margin-bottom: 50px;
-
+   @media (max-width: 1000px) {
+    font-size: 18px; 
+    max-width: 350px;
+    margin: auto;
+    margin-bottom: 50px;
+  } 
 
 `;
 

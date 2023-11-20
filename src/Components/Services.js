@@ -5,6 +5,10 @@ const Container = styled.div`
   height: 100vh;
   font-family: 'Roboto', sans-serif;
   margin-bottom: 300px;
+  @media (max-width: 1000px) {
+    margin-bottom: 0px;
+    max-height: 300px;
+  } 
 `;
 
 const Description = styled.div`
@@ -15,6 +19,10 @@ const Description = styled.div`
   text-align: center;
   max-width: 1200px; 
   margin: auto;
+  @media (max-width: 1000px) {
+    font-size: 19px;
+    text-align: left;
+  } 
   
 `;
 
@@ -33,13 +41,18 @@ const ImageContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 170px; 
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
+  @media (max-width: 1000px) {
+    display: none;
+  } 
 `;
 
 const StyledImage = styled.img`
   height: 80px;
   width: auto;
+  @media (max-width: 1000px) {
+    display: none;
+  } 
 `;
 
 const GridContainer = styled.div`
@@ -49,6 +62,9 @@ const GridContainer = styled.div`
   padding: 40px;
   max-width: 1150px;
   margin: 40px auto;
+  @media (max-width: 1000px) {
+    display: none;
+  }
 `;
 
 const GridItem = styled.div`
@@ -57,6 +73,9 @@ const GridItem = styled.div`
   padding-left: 0px; 
   font-size: 24px; 
   font-weight: 300;
+  @media (max-width: 1000px) {
+    display: none;
+  } 
 `; 
 
 const Underline = styled.div`
@@ -74,6 +93,12 @@ const TitleArea = styled.div`
   text-align: center;
   margin-bottom: 40px; 
   font-weight: 300;
+  @media (max-width: 1000px) {
+    font-size: 25px;
+    margin-bottom: 0px; 
+    text-align: center;
+    margin: auto;
+  }
 `;
 const StrikethroughText = styled(BoldText)`
   text-decoration: line-through;
