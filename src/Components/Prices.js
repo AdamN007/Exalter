@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-margin-bottom: 300px;
-padding-top: 200px;
+margin-bottom: 100px;
+@media (max-width: 1000px) {
+  margin-bottom: 100px;
+  padding-top: 200px;
+  }
 `;
 const BoxContainer = styled.div`
   display: flex;
@@ -22,7 +25,7 @@ const BoxContainer = styled.div`
 
 const Box = styled.div`
   
-  max-width: 700px; 
+  max-width: 500px; 
   height: 640px;
   border-top: 2px solid black;
   border-bottom: 2px solid black;
@@ -56,8 +59,8 @@ const BoxDescription = styled.div`
 const Pricing = styled.div`
   font-size: 45px;
   font-family: 'Arapey', serif;
-  margin-top: 10px;
-  padding: 35px;
+  margin-top: 40px;
+  padding-left: 35px;
   
   
 `;
@@ -72,6 +75,13 @@ const Button3D = styled.button`
   
   transition: all 0.3s ease;
   margin-top: 20px;
+
+  color: white; /* or any color you want for the text */
+  text-decoration: none; /* Removes the underline from links */
+  
+  &:link, &:visited, &:hover, &:active {
+    color: white; /* Ensures that the link color remains consistent */
+  }
   
 
  
@@ -120,9 +130,9 @@ const SmallText = styled.div`
 `;
 
 
-const Prices = () => {
+const Prices = forwardRef((props, ref) => {
   return (
-   <Wrapper>
+   <Wrapper ref={ref}>
    <Title>The Plans</Title>
    <SmallText> Transparent, flexible payment options to suit your needs.
 
@@ -130,48 +140,48 @@ const Prices = () => {
     <BoxContainer>
    
       <Box>
-        <BoxTitle>Core <br />Design</BoxTitle>
+        <BoxTitle>Basic <br />Website</BoxTitle>
         <HorizontalLine />
         <BoxDescription>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+          A basic infromational website with a Home page, 3 other pages and a contact page including a contact form. Ideal for small businesses or self employed.
         </BoxDescription>
-        <Pricing>$1,000 </Pricing>
-        
+        <Pricing>€500 </Pricing>
         <HorizontalLine />
         <ButtonContainer>
-          <Button3D>Sign Up</Button3D>
+          <Button3D>Purchase</Button3D>
         </ButtonContainer>
       </Box>
       <Box>
-        <BoxTitle>Design & <br />Development</BoxTitle>
+        <BoxTitle>Ecommerce <br />Store</BoxTitle>
         <HorizontalLine />
         <BoxDescription>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+         An Ecommerce store with payment functionality, Home page, 5 other pages and a contact page including a contact form. Ideal for businesses looking to sell online.
         </BoxDescription>
-        <Pricing>$2,750</Pricing>
+        <Pricing>€1,500</Pricing>
         
         <HorizontalLine />
         <ButtonContainer>
-          <Button3D>Sign Up</Button3D>
+          <Button3D>Purchase</Button3D>
         </ButtonContainer>
       </Box>
       <Box>
-        <BoxTitle>The <br />Weekly</BoxTitle>
+        <BoxTitle>Custom <br /> Solution</BoxTitle>
         <HorizontalLine />
         <BoxDescription>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+          A custom order, our other options dont meet your needs?, descripe your websites needs and get a free quote within 24 hours. Ideal for everyone :)
         </BoxDescription>
-        <Pricing>$4,000</Pricing>
+        <Pricing>€???</Pricing>
         
         <HorizontalLine />
         <ButtonContainer>
-          <Button3D>Sign Up</Button3D>
+          <Button3D>Get a Quote</Button3D>
         </ButtonContainer>
       </Box>
     </BoxContainer>
     </Wrapper>
   );
-}
+});
+
 
   
   

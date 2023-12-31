@@ -7,21 +7,37 @@ const FooterContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 65px 20px; 
-
   max-width: 1300px;
   margin: auto;
+
+  @media (max-width: 1000px) {
+    flex-direction: column; /* Stack elements vertically */
+    padding: 40px 20px; /* Adjust padding for smaller screens */
+    text-align: center; /* Center content */
+  }
 `;
 
 const WebsiteName = styled.div`
-    font-family: 'Berkshire Swash', cursive;
-    font-size: 40px;
+  font-family: 'Berkshire Swash', cursive;
+  font-size: 40px;
+
+  @media (max-width: 1000px) {
+    font-size: 30px; /* Decrease font size */
+    margin-bottom: 0px; /* Add space below the website name */
+  }
 `;
 
 const FooterText = styled.div`
-   font-family: 'Roboto', sans-serif;
-   font-weight: 300;
-   
-   font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+
+  @media (max-width: 1000px) {
+    font-size: 16px; /* Decrease font size */
+    order: 0; /* Move text to the bottom */
+    margin-top: 10px; /* Add space above the footer text */
+    margin-bottom: 20px;
+  }
 `;
 
 
@@ -42,7 +58,12 @@ const SmallImage = styled.img`
 const LogosContainer = styled.div`
   display: flex;
   align-items: center; 
-  gap: 10px; 
+  gap: 10px;
+
+  @media (max-width: 1000px) {
+    justify-content: center; /* Center logos */
+    margin-bottom: 20px; /* Add space below the logos */
+  }
 `;
 
 
@@ -68,7 +89,7 @@ const Footer = () => {
         <FooterContainer>
           <WebsiteName>Exalter</WebsiteName>
           <FooterText>
-            Made with <SmallImage src="/images/big-ben-svgrepo-com.png" alt="Big Ben" /> in London, UK
+            Designed with <SmallImage src="/images/big-ben-svgrepo-com.png" alt="Big Ben" /> in London, UK
           </FooterText>
           <LogosContainer>
           <InstagramLogo src="/images/instagram-svgrepo-com.png" alt="Instagram" />

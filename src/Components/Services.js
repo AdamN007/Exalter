@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
+
 import styled from 'styled-components';
 
 const Container = styled.div`
   height: 100vh;
   font-family: 'Roboto', sans-serif;
   margin-bottom: 300px;
+  @media (max-width: 3000px) {
+    margin-bottom: 900px;
+    max-height: 300px;
+  } 
+  @media (max-width: 2000px) {
+    margin-bottom: 900px;
+    max-height: 300px;
+  } 
   @media (max-width: 1000px) {
     margin-bottom: 0px;
     max-height: 300px;
@@ -22,6 +31,7 @@ const Description = styled.div`
   @media (max-width: 1000px) {
     font-size: 19px;
     text-align: left;
+    max-width: 450px;
   } 
   
 `;
@@ -41,7 +51,8 @@ const ImageContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  padding: 0 170px; 
+  margin-bottom: 20px; 
   @media (max-width: 1000px) {
     display: none;
   } 
@@ -88,17 +99,20 @@ const Underline = styled.div`
 `;
 
 const TitleArea = styled.div`
-  font-size: 80px; 
-  font-weight: 400;
-  text-align: center;
-  margin-bottom: 40px; 
+  padding: 35px;
+  font-size: 40px;
   font-weight: 300;
+  letter-spacing: 1px;
+  text-align: center;
+  max-width: 1200px; 
+  margin: auto;
   @media (max-width: 1000px) {
-    font-size: 25px;
-    margin-bottom: 0px; 
-    text-align: center;
-    margin: auto;
-  }
+    font-size: 20px;
+    max-width: 350px;
+    text-align: left;
+  } 
+  
+
 `;
 const StrikethroughText = styled(BoldText)`
   text-decoration: line-through;
@@ -106,7 +120,7 @@ const StrikethroughText = styled(BoldText)`
 
 
 
-const Services = () => {
+const Services = forwardRef((props, ref) => {
   const words = [
     "Website Creation", "Reliable Hosting", "Boost Your Visibility",
     "Fast Load Times", "Data Management", "Interactive Designs",
@@ -114,7 +128,7 @@ const Services = () => {
     "Smart Solutions", "Secure Payments", "Complete Service"
   ];
   return (
-    <Container>
+    <Container ref={ref}>
     <TitleArea>
         <BoldText>Website Design & Development</BoldText><br />
         Brand Identity, <BoldText>Custom Design &<br />
@@ -145,7 +159,7 @@ const Services = () => {
         ))}
       </GridContainer>
     </Container>
-  )
-}
+  );
+});
 
 export default Services;

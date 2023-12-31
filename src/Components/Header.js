@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, forwardRef  } from 'react';
 import styled from 'styled-components';
 import Typed from 'typed.js';
 import { ArrowIosUpwardOutline } from '@styled-icons/evaicons-outline/ArrowIosUpwardOutline';
@@ -79,6 +79,13 @@ const Button3D = styled.button`
     0 8px #B71C1C, 
     0 10px 10px rgba(0, 0, 0, 0.5); 
 
+    color: white; /* or any color you want for the text */
+  text-decoration: none; /* Removes the underline from links */
+  
+  &:link, &:visited, &:hover, &:active {
+    color: white; /* Ensures that the link color remains consistent */
+  }
+
   &:hover {
     background-color: #C62828; 
   }
@@ -117,8 +124,9 @@ const ArrowIcon = styled(ArrowIosUpwardOutline)`
 
 
 
-const Header = () => {
+const Header = forwardRef((props, ref) => {
   const el = useRef(null);
+  
 
   useEffect(() => {
     const typed = new Typed(el.current, {
@@ -137,7 +145,7 @@ const Header = () => {
   }, []);
 
   return (
-    <Container>
+    <Container ref={ref}>
       <TitleDescription>
         Design &<br />
         Development,
@@ -150,6 +158,6 @@ const Header = () => {
     
     </Container>
   );
-};
+});
 
 export default Header;

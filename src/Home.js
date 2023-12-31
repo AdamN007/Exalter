@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import Header from './Components/Header';
 import Services from './Components/Services';
 import Prices from './Components/Prices';
 import ContactUs from './Components/ContactUs';
 import Footer from './Components/Footer';
+import Navbar from './Components/Navbar';
 
 
 
@@ -30,17 +31,29 @@ background-size:
 
 
 
+// Home Component
 const Home = () => {
+  const homeRef = useRef(null);
+  const servicesRef = useRef(null);
+  const pricingRef = useRef(null);
+  const contactRef = useRef(null);
+
   return (
     <BlueprintBackground>
-     <Header />
-     <Services />
-     
-     <Prices />
-     <ContactUs />
+      <Navbar 
+        homeRef={homeRef}
+        servicesRef={servicesRef}
+        pricingRef={pricingRef}
+        contactRef={contactRef}
+      />
+      <Header ref={homeRef} id="home"></Header>
+      <Services ref={servicesRef} id="services"/>
+      <Prices ref={pricingRef} id="pricing"/>
+      <ContactUs ref={contactRef} id="contact"/>
       <Footer />
     </BlueprintBackground>
   )
 }
 
 export default Home;
+
