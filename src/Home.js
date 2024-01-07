@@ -22,7 +22,7 @@ background-size:
     100px 100px,
     100px 100px;
   
-  width: 100vw;
+  width: 100%;
   position: absolute;
   top: 0;
   left: 0;

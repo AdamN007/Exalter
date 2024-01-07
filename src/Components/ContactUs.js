@@ -1,4 +1,6 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useRef, useState } from 'react';
+import emailjs from 'emailjs-com';
+
 import styled from 'styled-components';
 
 
@@ -71,7 +73,7 @@ const TextArea = styled.textarea`
 const Button3D = styled.button`
   background-color: #E02424;
   border: none;
-  padding: 18px 150px;
+  padding: 18px 325px;
   font-size: 20px; 
   border-radius: 5px; 
   cursor: pointer;
@@ -81,7 +83,7 @@ const Button3D = styled.button`
   
   
   transition: all 0.3s ease;
-  margin-top: 20px;
+  margin-top: 35px;
 
   @media (max-width: 1000px) {
     display: block;
@@ -138,24 +140,37 @@ const SmallText = styled.div`
 
 
 const ContactUs = forwardRef((props, ref) => {
-    return (
-        <Container ref={ref}>
-       <Title>Contact Us</Title>
-       <SmallText>We're here to help with any inquiries or feedback you have</SmallText>
-      <ContactForm>
-      
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm('service_k66zxis', 'template_6qyhkpb', form.current, 'wXoasOPVtxw7WJgHe')
+      .then((result) => {
+          console.log(result.text);
+          // You can add some code here to notify the user that the email was sent successfully
+      }, (error) => {
+          console.log(error.text);
+          // Or here, to handle errors in email sending
+      });
+  };
+
+  return (
+    <Container ref={ref}>
+      <Title>Contact Us</Title>
+      <SmallText>We're here to help with any inquiries or feedback you have</SmallText>
+      <ContactForm ref={form} onSubmit={sendEmail}>
         <FieldContainer>
-          <Input type="text" placeholder="Name" /> 
+          <Input type="text" name="user_name" placeholder="Name" /> 
         </FieldContainer>
         <FieldContainer>
-        <Input type="email" placeholder="Email" />
+          <Input type="email" name="user_email" placeholder="Email" />
         </FieldContainer>
-        <TextArea placeholder="Description"></TextArea>
+        <TextArea name="user_message" placeholder="Message"></TextArea>
         <Button3D type="submit">Submit</Button3D>
       </ContactForm>
-      </Container>
-    );
-  });
+    </Container>
+  );
+});
 
-  
-  export default ContactUs;
+export default ContactUs;

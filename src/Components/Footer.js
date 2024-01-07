@@ -6,8 +6,8 @@ const FooterContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 65px 20px; 
-  max-width: 1300px;
+  padding: 65px 100px; 
+  
   margin: auto;
 
   @media (max-width: 1000px) {
@@ -30,7 +30,7 @@ const WebsiteName = styled.div`
 const FooterText = styled.div`
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
-  font-size: 18px;
+  font-size: 20px;
 
   @media (max-width: 1000px) {
     font-size: 16px; /* Decrease font size */
@@ -46,12 +46,15 @@ const HorizontalLine = styled.hr`
   border: 0;
   height: 1px;
   background-color: black;
-  margin: 20px auto; 
-  max-width: 1300px; 
+  margin: 20px; 
+  margin-left: 100px;
+  margin-right: 100px;
+  
+   
 `;
 
 const SmallImage = styled.img`
-  height: 35px;
+  height: 40px;
   vertical-align: bottom;
 `;
 
@@ -89,7 +92,7 @@ const Footer = () => {
         <FooterContainer>
           <WebsiteName>Exalter</WebsiteName>
           <FooterText>
-            Designed with <SmallImage src="/images/big-ben-svgrepo-com.png" alt="Big Ben" /> in London, UK
+            Designed with <SmallImage src="/images/harp.png" alt="Big Ben" /> in Dublin, Ireland
           </FooterText>
           <LogosContainer>
           <InstagramLogo src="/images/instagram-svgrepo-com.png" alt="Instagram" />

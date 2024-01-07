@@ -3,7 +3,9 @@ import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  height: 100vh;
+  
+  margin-left: 80px;
+  margin-right: 80px;
   font-family: 'Roboto', sans-serif;
   margin-bottom: 300px;
   @media (max-width: 3000px) {
