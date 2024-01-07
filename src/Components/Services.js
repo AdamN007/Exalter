@@ -58,10 +58,6 @@ const ImageContainer = styled.div`
   align-items: center;
   padding: 0 170px; 
   margin-bottom: 20px; 
-  max-width: 1500px;
-  @media (max-width: 1400px) {
-    padding: 0 40px; 
-  } 
   @media (max-width: 1000px) {
     display: none;
   } 
