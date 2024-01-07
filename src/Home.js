@@ -12,10 +12,10 @@ import Navbar from './Components/Navbar';
 const BlueprintBackground = styled.div`
 background-color: #f0faff; 
 background-image: 
-  linear-gradient(#f2f2f2  1px, transparent 1px),  
-  linear-gradient(90deg, #f2f2f2  1px, transparent 1px), 
-  linear-gradient(#e6e6e6 1px, transparent 2px), 
-  linear-gradient(90deg, #e6e6e6 1px, transparent 2px); 
+  linear-gradient(#efefef  1px, transparent 1px),  
+  linear-gradient(90deg, #efefef  1px, transparent 1px), 
+  linear-gradient(#d7d7d7 1px, transparent 2px), 
+  linear-gradient(90deg, #d7d7d7 1px, transparent 2px); 
 background-size: 
     10px 10px,
     10px 10px, 
@@ -27,6 +27,10 @@ background-size:
   top: 0;
   left: 0;
   z-index: -1;
+  ::selection {
+  background: #ffb7b7; /* Light red background */
+  color: #000000; /* Black text */
+}
 `;
 
 

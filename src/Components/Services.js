@@ -3,39 +3,42 @@ import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  
   margin-left: 80px;
   margin-right: 80px;
   font-family: 'Roboto', sans-serif;
   margin-bottom: 300px;
   @media (max-width: 3000px) {
-    margin-bottom: 900px;
-    max-height: 300px;
   } 
   @media (max-width: 2000px) {
-    margin-bottom: 900px;
-    max-height: 300px;
   } 
   @media (max-width: 1000px) {
     margin-bottom: 0px;
-    max-height: 300px;
+    margin-left: 0px;
+    margin-right: 0px; 
   } 
 `;
 
 const Description = styled.div`
   padding: 35px;
-  font-size: 40px;
+  font-size: 4vw;
   font-weight: 300;
   letter-spacing: 1px;
-  text-align: center;
-  max-width: 1200px; 
+  max-width: 1500px; 
+  text-align: justify;
   margin: auto;
+  margin-top: 100px;
   @media (max-width: 1000px) {
-    font-size: 19px;
-    text-align: left;
-    max-width: 450px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 0px;
+    font-size: 5vw;
+    text-align: justify;
+    padding: 35px;
   } 
-  
+  ::selection {
+  background: #bf0000; /* Light red background */
+  color: #000000; /* Black text */
+}
 `;
 
 
@@ -55,13 +58,17 @@ const ImageContainer = styled.div`
   align-items: center;
   padding: 0 170px; 
   margin-bottom: 20px; 
+  max-width: 1500px;
+  @media (max-width: 1400px) {
+    padding: 0 40px; 
+  } 
   @media (max-width: 1000px) {
     display: none;
   } 
 `;
 
 const StyledImage = styled.img`
-  height: 80px;
+  height: 120px;
   width: auto;
   @media (max-width: 1000px) {
     display: none;
@@ -102,19 +109,16 @@ const Underline = styled.div`
 
 const TitleArea = styled.div`
   padding: 35px;
-  font-size: 40px;
+  font-size: 5vw;
   font-weight: 300;
   letter-spacing: 1px;
   text-align: center;
-  max-width: 1200px; 
+  max-width: 1500px; 
   margin: auto;
+  margin-bottom: 100px;
   @media (max-width: 1000px) {
-    font-size: 20px;
-    max-width: 350px;
-    text-align: left;
-  } 
-  
-
+    margin-bottom: 10px;
+  }
 `;
 const StrikethroughText = styled(BoldText)`
   text-decoration: line-through;

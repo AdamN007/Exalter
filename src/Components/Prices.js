@@ -5,7 +5,6 @@ const Wrapper = styled.div`
 margin-bottom: 100px;
 @media (max-width: 1000px) {
   margin-bottom: 100px;
-  padding-top: 200px;
   }
 `;
 const BoxContainer = styled.div`
