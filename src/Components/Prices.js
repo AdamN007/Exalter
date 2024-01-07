@@ -45,7 +45,7 @@ const BoxTitle = styled.div`
 const HorizontalLine = styled.div`
   height: 1px; 
   background-color: black; 
-  width: 80%; 
+  width: 85%; 
   margin: 10px auto;
 `;
 
@@ -60,7 +60,7 @@ const Pricing = styled.div`
   font-size: 45px;
   font-family: 'Arapey', serif;
   margin-top: 40px;
-  padding-left: 35px;
+  padding-left: 45px;
   
   
 `;
@@ -104,6 +104,7 @@ const Button3D = styled.button`
 const ButtonContainer = styled.div`
   text-align: center;
   
+  
 `;
 
 const Title = styled.div`
@@ -130,7 +131,13 @@ const SmallText = styled.div`
 `;
 
 
-const Prices = forwardRef((props, ref) => {
+const Prices = forwardRef(({ contactRef }, ref) => {
+
+  const scrollToContact = () => {
+    if (contactRef.current) {
+      contactRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   return (
    <Wrapper ref={ref}>
    <Title>The Plans</Title>
@@ -145,10 +152,10 @@ const Prices = forwardRef((props, ref) => {
         <BoxDescription>
           A basic infromational website with a Home page, 3 other pages and a contact page including a contact form. Ideal for small businesses or self employed.
         </BoxDescription>
-        <Pricing>€500 </Pricing>
+        <Pricing>€1000 </Pricing>
         <HorizontalLine />
         <ButtonContainer>
-          <Button3D>Purchase</Button3D>
+        <Button3D onClick={scrollToContact}>Contact Us</Button3D>
         </ButtonContainer>
       </Box>
       <Box>
@@ -157,11 +164,11 @@ const Prices = forwardRef((props, ref) => {
         <BoxDescription>
          An Ecommerce store with payment functionality, Home page, 5 other pages and a contact page including a contact form. Ideal for businesses looking to sell online.
         </BoxDescription>
-        <Pricing>€1,500</Pricing>
+        <Pricing>€2000</Pricing>
         
         <HorizontalLine />
         <ButtonContainer>
-          <Button3D>Purchase</Button3D>
+        <Button3D onClick={scrollToContact}>Contact Us</Button3D>
         </ButtonContainer>
       </Box>
       <Box>
@@ -174,7 +181,7 @@ const Prices = forwardRef((props, ref) => {
         
         <HorizontalLine />
         <ButtonContainer>
-          <Button3D>Get a Quote</Button3D>
+        <Button3D onClick={scrollToContact}>Contact Us</Button3D>
         </ButtonContainer>
       </Box>
     </BoxContainer>

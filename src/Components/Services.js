@@ -55,6 +55,8 @@ const ImageContainer = styled.div`
   align-items: center;
   padding: 0 170px; 
   margin-bottom: 20px; 
+  max-width: 1400px;
+  margin: auto;
   @media (max-width: 1000px) {
     display: none;
   } 

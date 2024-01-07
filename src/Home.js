@@ -48,7 +48,9 @@ const Home = () => {
       />
       <Header ref={homeRef} id="home"></Header>
       <Services ref={servicesRef} id="services"/>
-      <Prices ref={pricingRef} id="pricing"/>
+      
+<Prices ref={pricingRef} contactRef={contactRef} id="pricing"/>
+
       <ContactUs ref={contactRef} id="contact"/>
       <Footer />
     </BlueprintBackground>

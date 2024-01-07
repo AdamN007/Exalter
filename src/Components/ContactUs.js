@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 
 const Container = styled.div`
-  margin-bottom: 40px;
+  margin-bottom: 100px;
 
 `
 
@@ -13,6 +13,7 @@ const ContactForm = styled.form`
   max-width: 700px;
   margin: auto;
   padding: 40px;
+  
   border: 0px solid black;
   border-radius: 70px;
   justify-content: center;
@@ -34,14 +35,7 @@ const FieldContainer = styled.div`
   justify-content: space-between;
 
   @media (min-width: 1001px) {
-    flex-direction: row; /* Aligns children horizontally for wider screens */
-    justify-content: flex-start; /* Aligns children to the start of the container */
-    & > * {
-      margin-right: 20px; /* Adds space between the children */
-      &:last-child {
-        margin-right: 0; /* Removes margin from the last child */
-      }
-    }
+    
   }
 `;
 
@@ -65,7 +59,7 @@ const TextArea = styled.textarea`
   height: 250px;
   margin-bottom: 0px;
   @media (max-width: 1000px) {
-    width: 90%;
+    width: 95%;
   }
 `;
 
@@ -88,8 +82,9 @@ const Button3D = styled.button`
   @media (max-width: 1000px) {
     display: block;
     margin-left: auto;
-    padding: 18px 100px;
-    margin-right: auto; /* center the button for widths below 1000px */
+    padding: 18px ;
+    margin-right: auto; 
+    width: 100%;
   }
 
   color: white; /* or any color you want for the text */
@@ -138,20 +133,102 @@ const SmallText = styled.div`
 
 `;
 
+const SubmittedFormContainer = styled.div`
+  max-width: 700px;
+  margin: 0 auto; // Center the container
+  padding: 40px;
+  
+  border-radius: 70px;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (max-width: 1000px) {
+    width: calc(100% - 70px); // Adjust the width based on the padding
+    padding: 40px 20px;
+    
+   
+  }
+`;
+
+
+const SubmittedFormField = styled.div`
+   display: flex;
+  flex-direction: column; // Stack items vertically
+  align-items: flex-start; // Align items to the start of the container
+  width: 100%;
+  margin-bottom: 30px;
+
+  @media (max-width: 1001px) {
+    flex-direction: column; // On smaller screens, stack them vertically
+    & > * {
+      width: 100%; // Ensure full width on smaller screens
+      margin-right: 0; // Remove margin-right on smaller screens
+    }
+  }
+`;
+
+const SubmittedFormLabel = styled.div`
+   /* This is a dark gray, cooler and lighter than black */
+color: #333333;
+  font-size: 19px;
+  font-family: 'Roboto', sans-serif;
+  
+  min-width: 100px; // Optional: Set a minimum width for the label
+  margin-bottom: 15px;
+ 
+`;
+
+const SubmittedFormData = styled.div`
+  color: #555;
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+  padding: 15px;
+  border-radius: 20px;
+  border: 1px solid black;
+  flex-grow: 1;
+  
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  max-height: 500px;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  white-space: pre-wrap; 
+  width: 100%; // Set width to fill the parent container
+`;
+
+
+
 
 const ContactUs = forwardRef((props, ref) => {
   const form = useRef();
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
   const sendEmail = (e) => {
     e.preventDefault();
+    setIsLoading(true);
+
+    const data = new FormData(form.current);
+    setFormData({
+      name: data.get('user_name'),
+      email: data.get('user_email'),
+      message: data.get('user_message')
+    });
 
     emailjs.sendForm('service_k66zxis', 'template_6qyhkpb', form.current, 'wXoasOPVtxw7WJgHe')
       .then((result) => {
           console.log(result.text);
-          // You can add some code here to notify the user that the email was sent successfully
+          setIsSubmitted(true);
+          setIsLoading(false);
       }, (error) => {
           console.log(error.text);
-          // Or here, to handle errors in email sending
+          setIsLoading(false);
       });
   };
 
@@ -159,16 +236,33 @@ const ContactUs = forwardRef((props, ref) => {
     <Container ref={ref}>
       <Title>Contact Us</Title>
       <SmallText>We're here to help with any inquiries or feedback you have</SmallText>
-      <ContactForm ref={form} onSubmit={sendEmail}>
-        <FieldContainer>
-          <Input type="text" name="user_name" placeholder="Name" /> 
-        </FieldContainer>
-        <FieldContainer>
-          <Input type="email" name="user_email" placeholder="Email" />
-        </FieldContainer>
-        <TextArea name="user_message" placeholder="Message"></TextArea>
-        <Button3D type="submit">Submit</Button3D>
-      </ContactForm>
+      {!isSubmitted ? (
+        <ContactForm ref={form} onSubmit={sendEmail}>
+          <FieldContainer>
+            <Input type="text" name="user_name" placeholder="Name" disabled={isLoading} />
+          </FieldContainer>
+          <FieldContainer>
+            <Input type="email" name="user_email" placeholder="Email" disabled={isLoading} />
+          </FieldContainer>
+          <TextArea name="user_message" placeholder="Message" disabled={isLoading}></TextArea>
+          <Button3D type="submit" disabled={isLoading}>Submit</Button3D>
+        </ContactForm>
+      ) : (
+        <SubmittedFormContainer>
+          <SubmittedFormField>
+            <SubmittedFormLabel>Name:</SubmittedFormLabel>
+            <SubmittedFormData>{formData.name}</SubmittedFormData>
+          </SubmittedFormField>
+          <SubmittedFormField>
+            <SubmittedFormLabel>Email:</SubmittedFormLabel>
+            <SubmittedFormData>{formData.email}</SubmittedFormData>
+          </SubmittedFormField>
+          <SubmittedFormField>
+            <SubmittedFormLabel>Message:</SubmittedFormLabel>
+            <SubmittedFormData>{formData.message}</SubmittedFormData>
+          </SubmittedFormField>
+        </SubmittedFormContainer>
+      )}
     </Container>
   );
 });

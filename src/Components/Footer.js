@@ -23,7 +23,7 @@ const WebsiteName = styled.div`
 
   @media (max-width: 1000px) {
     font-size: 30px; /* Decrease font size */
-    margin-bottom: 0px; /* Add space below the website name */
+    margin-bottom: 20px; /* Add space below the website name */
   }
 `;
 
@@ -36,7 +36,7 @@ const FooterText = styled.div`
     font-size: 16px; /* Decrease font size */
     order: 0; /* Move text to the bottom */
     margin-top: 10px; /* Add space above the footer text */
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
 `;
 
@@ -50,6 +50,10 @@ const HorizontalLine = styled.hr`
   margin-left: 100px;
   margin-right: 100px;
   
+  @media (max-width: 1000px) {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
    
 `;
 
