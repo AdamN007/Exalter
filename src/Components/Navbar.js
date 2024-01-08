@@ -82,8 +82,8 @@ const Logo = styled.div`
   }
   font-family: 'Berkshire Swash', cursive;
   position: absolute;
+  transform: translate(-50%);
   left: 50%;
-  transform: translateX(-50%);
 `;
 
 const HamburgerMenu = styled.div`
