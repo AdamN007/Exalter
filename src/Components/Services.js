@@ -59,34 +59,34 @@ const ImageContainer = styled.div`
   margin-bottom: 20px; 
   max-width: 1800px;
   margin: auto;
-  @media (max-width: 1400px) {
-    
-  } 
+  flex-wrap: wrap; // Allows the images to wrap to the next line on smaller screens
+
   @media (max-width: 1000px) {
-    margin-left: 5%;
-    margin-right: 5%;
-  } 
+    justify-content: center; // Centers the images on smaller screens
+  }
 `;
 
 const StyledImage = styled(motion.img)`
   height: 120px;
   width: auto;
+  margin: 5px; // Adds a small margin around each image for spacing
+
   @media (max-width: 1400px) {
-    height: 100px;
+    height: 100px; // Adjusts the image height for medium screens
   } 
   @media (max-width: 1000px) {
-    height: 80px;
+    height: 80px; // Adjusts the image height for smaller screens
   } 
   @media (max-width: 700px) {
     height: 60px;
+    margin: 10px; 
   }
   @media (max-width: 500px) {
-    height: 40px;
+    height: 40px; // Adjusts the image height for extra small screens
   }
   @media (max-width: 300px) {
-    height: 30px;
+    height: 30px; // Adjusts the image height for the smallest screens
   }
-
 `;
 const GridContainer = styled.div`
   display: grid;

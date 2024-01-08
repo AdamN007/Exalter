@@ -1,7 +1,6 @@
 import React, { forwardRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { motion, useAnimation } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+;
 
 const Wrapper = styled.div`
 margin-bottom: 100px;
@@ -151,14 +150,6 @@ const SmallText = styled.div`
 
 `;
 
-const boxVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: 'easeOut' }
-  }
-};
 
 
 const Prices = forwardRef(({ contactRef }, ref) => {
@@ -170,14 +161,7 @@ const Prices = forwardRef(({ contactRef }, ref) => {
   };
 
 
-  const controls = useAnimation();
-  const [boxRef, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
-
-  useEffect(() => {
-    if (inView) {
-      controls.start('visible');
-    }
-  }, [controls, inView]);
+  
   return (
    <Wrapper ref={ref}>
    <Title>The Plans</Title>
@@ -185,12 +169,7 @@ const Prices = forwardRef(({ contactRef }, ref) => {
 
 </SmallText>
      <BoxContainer>
-        <motion.div
-          ref={boxRef}
-          initial="hidden"
-          animate={controls}
-          variants={boxVariants}
-        >
+       
           <Box>
             <BoxTitle>Basic <br />Website</BoxTitle>
             <HorizontalLine />
@@ -203,13 +182,8 @@ const Prices = forwardRef(({ contactRef }, ref) => {
               <Button3D onClick={scrollToContact}>Contact Us</Button3D>
             </ButtonContainer>
           </Box>
-        </motion.div>
-        <motion.div
-          ref={boxRef}
-          initial="hidden"
-          animate={controls}
-          variants={boxVariants}
-        >
+        
+       
           <Box>
             <BoxTitle>Ecommerce <br />Store</BoxTitle>
             <HorizontalLine />
@@ -222,13 +196,8 @@ const Prices = forwardRef(({ contactRef }, ref) => {
               <Button3D onClick={scrollToContact}>Contact Us</Button3D>
             </ButtonContainer>
           </Box>
-        </motion.div>
-        <motion.div
-          ref={boxRef}
-          initial="hidden"
-          animate={controls}
-          variants={boxVariants}
-        >
+       
+       
           <Box>
             <BoxTitle>Custom <br />Solution</BoxTitle>
             <HorizontalLine />
@@ -241,7 +210,7 @@ const Prices = forwardRef(({ contactRef }, ref) => {
               <Button3D onClick={scrollToContact}>Contact Us</Button3D>
             </ButtonContainer>
           </Box>
-        </motion.div>
+        
       </BoxContainer>
     </Wrapper>
   );
