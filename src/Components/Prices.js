@@ -72,8 +72,10 @@ const Pricing = styled.div`
   font-size: 45px;
   font-family: 'Arapey', serif;
   margin-top: 40px;
-  padding-left: 45px;
-  
+  padding-left: 35px;
+   @media (max-width: 1000px) {
+    padding-left: 35px;
+   }
   
 `;
 
@@ -159,7 +161,7 @@ const boxVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: 'easeOut' }
+    transition: { duration: 1, ease: 'easeOut' }
   }
 };
 

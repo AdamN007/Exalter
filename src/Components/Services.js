@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
@@ -177,7 +177,7 @@ const containerVariants = {
   visible: { 
     scale: 1,
     opacity: 1,
-    transition: { duration: 0.5 }
+    transition: { duration: 1 }
   }
 };
 
@@ -202,7 +202,7 @@ const gridItemVariants = {
   visible: { 
     opacity: 1, 
     scale: 1, 
-    transition: { duration: 0.3, ease: 'easeOut' }
+    transition: { duration: 1, ease: 'easeOut' }
   }
 };
 
@@ -213,7 +213,7 @@ const gridContainerVariants = {
     opacity: 1,
     transition: {
       staggerChildren: 0.1, // Stagger the animation of children
-      duration: 0.5
+      duration: 1
     }
   }
 };
@@ -223,13 +223,13 @@ const slideInVariants = {
   visible: {
     x: 0,
     opacity: 1,
-    transition: { duration: 0.5, ease: 'easeOut' }
+    transition: { duration: 1, ease: 'easeOut' }
   }
 };
 
 const Services = forwardRef((props, ref) => {
   const size = useWindowSize();
-  const isMobile = size.width <= 350;
+  const isMobile = size.width <= 400;
   
   const words = [
     "Website Creation", "Reliable Hosting", "Boost Your Visibility",
@@ -244,7 +244,7 @@ const Services = forwardRef((props, ref) => {
   
   
   const descriptionControls = useAnimation();
-  const [descriptionRef, descriptionInView] = useInView({ triggerOnce: true, threshold: 0.3 });
+  const [descriptionRef, descriptionInView] = useInView({ triggerOnce: true, threshold: 1 });
 
   useEffect(() => {
     if (descriptionInView) {
@@ -256,7 +256,7 @@ const Services = forwardRef((props, ref) => {
  
 
   const gridControls = useAnimation();
-  const [gridRef, gridInView] = useInView({ triggerOnce: true, threshold: 0.3 });
+  const [gridRef, gridInView] = useInView({ triggerOnce: true, threshold: 1 });
 
   useEffect(() => {
     if (gridInView) {
@@ -279,7 +279,7 @@ const Services = forwardRef((props, ref) => {
         <TitleArea>
         <BoldText>Website Design & Development </BoldText>
           Brand Identity, <BoldText>Custom Design &
-          Development,</BoldText> Advertising, <BoldText>UI/UX</BoldText>
+          Development,</BoldText> Advertising, <BoldText>UI/UX </BoldText>
           Efficient, <StrikethroughText>Existential Worries</StrikethroughText>
         </TitleArea>
       ) : (
