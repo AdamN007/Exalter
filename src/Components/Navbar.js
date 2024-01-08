@@ -17,8 +17,7 @@ const NavbarContainer = styled.div`
   left: 0;
   right: 0;
   z-index: 1000;
-  background-color: transparent; 
-  backdrop-filter: blur(1px);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
   @media (max-width: 1000px) {
     width: 95%;
   } 

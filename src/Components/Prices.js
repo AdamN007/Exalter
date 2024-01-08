@@ -59,7 +59,10 @@ const BoxDescription = styled.div`
   font-size: 20px; 
    font-weight: 300;
    letter-spacing: 1px;
+   min-height: 150px;
+    max-height: 150px;
    @media (max-width: 1450px) {
+    min-height: 150px;
     max-height: 150px;
    }
 `;
@@ -89,7 +92,7 @@ const Button3D = styled.button`
 
   @media (max-width: 1400px) {
     padding: 18px 0px;
-    width: 60%;
+    width: 80%;
     text-align: center;
    }
    @media (max-width: 1000px) {
