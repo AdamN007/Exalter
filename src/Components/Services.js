@@ -7,7 +7,6 @@ const Container = styled.div`
   margin-left: 80px;
   margin-right: 80px;
   font-family: 'Roboto', sans-serif;
-  margin-bottom: 300px;
   @media (max-width: 3000px) {
   } 
   @media (max-width: 2000px) {
@@ -21,7 +20,7 @@ const Container = styled.div`
 
 const Description = styled(motion.div)`
   padding: 35px;
-  font-size: 4vw;
+  font-size: 3vw;
   font-weight: 300;
   letter-spacing: 1px;
   
@@ -57,8 +56,12 @@ const ImageContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 170px; 
   margin-bottom: 20px; 
+  max-width: 1800px;
+  margin: auto;
+  @media (max-width: 1400px) {
+    display: none;
+  } 
   @media (max-width: 1000px) {
     display: none;
   } 
@@ -87,7 +90,7 @@ const GridItem = styled.div`
   text-align: left;
   position: relative;
   padding-left: 0px; 
-  font-size: 24px; 
+  font-size: 2vw; 
   font-weight: 300;
   @media (max-width: 1000px) {
     display: none;

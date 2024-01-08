@@ -30,6 +30,9 @@ const Box = styled.div`
   border-bottom: 2px solid black;
   border-left: 1px dashed black;
   border-right: 1px dashed black;
+  @media (max-width: 1400px) {
+    min-width: 300px;
+   }
 `;
 
 
@@ -53,6 +56,9 @@ const BoxDescription = styled.div`
   font-size: 20px; 
    font-weight: 300;
    letter-spacing: 1px;
+   @media (max-width: 1450px) {
+    max-height: 150px;
+   }
 `;
 
 const Pricing = styled.div`
@@ -77,6 +83,17 @@ const Button3D = styled.button`
 
   color: white; /* or any color you want for the text */
   text-decoration: none; /* Removes the underline from links */
+
+  @media (max-width: 1400px) {
+    padding: 18px 0px;
+    width: 60%;
+    text-align: center;
+   }
+   @media (max-width: 1000px) {
+    padding: 18px 0px;
+    width: 90%;
+    text-align: center;
+   }
   
   &:link, &:visited, &:hover, &:active {
     color: white; /* Ensures that the link color remains consistent */
@@ -107,21 +124,22 @@ const ButtonContainer = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 100px; 
+  font-size: 5vw; 
  letter-spacing: 1px;
   text-align: center;
   @media (max-width: 1000px) {
-    font-size: 40px; 
+    font-size: 9vw; 
+    margin-bottom: 20px;
   } 
 
 `;
 
 const SmallText = styled.div`
    text-align: center;
-   font-size: 20px;
+   font-size: 2vw;
    margin-bottom: 50px;
    @media (max-width: 1000px) {
-    font-size: 18px; 
+    font-size: 4vw; 
     max-width: 350px;
     margin: auto;
     margin-bottom: 50px;
