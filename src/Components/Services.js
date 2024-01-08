@@ -23,7 +23,7 @@ const Description = styled(motion.div)`
   font-size: 3vw;
   font-weight: 300;
   letter-spacing: 1px;
-  
+  max-width: 2500px;
   text-align: justify;
   margin: auto;
   margin-top: 100px;
@@ -77,9 +77,9 @@ const StyledImage = styled(motion.img)`
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 60px; 
+  grid-gap: 80px; 
   padding: 40px;
-  max-width: 1150px;
+  max-width: 2500px;
   margin: 40px auto;
   @media (max-width: 1000px) {
     display: none;
@@ -90,7 +90,7 @@ const GridItem = styled.div`
   text-align: left;
   position: relative;
   padding-left: 0px; 
-  font-size: 2vw; 
+  font-size: 1.5vw; 
   font-weight: 300;
   @media (max-width: 1000px) {
     display: none;
@@ -124,6 +124,60 @@ const StrikethroughText = styled(BoldText)`
 `;
 
 
+const containerVariants = {
+  hidden: { scale: 0.8, opacity: 0 },
+  visible: { 
+    scale: 1,
+    opacity: 1,
+    transition: { duration: 0.5 }
+  }
+};
+
+const imageVariants = {
+  hiddenLeft: { x: -100, opacity: 0 },
+  hiddenRight: { x: 100, opacity: 0 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 120,
+      damping: 20,
+      delay: 0.1,
+    }
+  }
+};
+
+
+const gridItemVariants = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: { 
+    opacity: 1, 
+    scale: 1, 
+    transition: { duration: 0.3, ease: 'easeOut' }
+  }
+};
+
+// Define animation variants for the grid container
+const gridContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1, // Stagger the animation of children
+      duration: 0.5
+    }
+  }
+};
+
+const slideInVariants = {
+  hidden: { x: -100, opacity: 0 },  // Starting from left
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: { duration: 0.5, ease: 'easeOut' }
+  }
+};
 
 const Services = forwardRef((props, ref) => {
   const words = [
@@ -135,48 +189,31 @@ const Services = forwardRef((props, ref) => {
 
 
 
-  const containerVariants = {
-    hidden: { scale: 0.8, opacity: 0 },
-    visible: { 
-      scale: 1,
-      opacity: 1,
-      transition: { duration: 0.5 }
-    }
-  };
-
-  const imageVariants = {
-    hiddenLeft: { x: -100, opacity: 0 },
-    hiddenRight: { x: 100, opacity: 0 },
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 120,
-        damping: 20,
-        delay: 0.1,
-      }
-    }
-  };
   
   
-  const controls = useAnimation();
-  const [descriptionRef, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
+  
+  const descriptionControls = useAnimation();
+  const [descriptionRef, descriptionInView] = useInView({ triggerOnce: true, threshold: 0.3 });
 
   useEffect(() => {
-    if (inView) {
-      controls.start('visible');
+    if (descriptionInView) {
+      descriptionControls.start('visible');
     }
-  }, [controls, inView]);
+  }, [descriptionControls, descriptionInView]);
 
-  const descriptionVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { duration: 0.8, ease: 'easeOut' }
+
+ 
+
+  const gridControls = useAnimation();
+  const [gridRef, gridInView] = useInView({ triggerOnce: true, threshold: 0.3 });
+
+  useEffect(() => {
+    if (gridInView) {
+      gridControls.start('visible');
     }
-  };
-  
+  }, [gridControls, gridInView]);
+
+
   return (
 
     <motion.div 
@@ -235,11 +272,11 @@ const Services = forwardRef((props, ref) => {
     viewport={{ once: true }}
   />
 </ImageContainer>
-       <Description
+        <Description
           ref={descriptionRef}
           initial="hidden"
-          animate={controls}
-          variants={descriptionVariants}
+          animate={descriptionControls}
+          variants={containerVariants} // Reusing containerVariants for Description
         >
         We specialize in creating custom websites, tailored to your specific needs, 
         with robust web hosting on platforms like <SemiBoldText>AWS</SemiBoldText>. Our focus is 
@@ -248,14 +285,23 @@ const Services = forwardRef((props, ref) => {
         <SemiBoldText>JavaScript</SemiBoldText>, <SemiBoldText>Python</SemiBoldText>, and <SemiBoldText>Stripe</SemiBoldText> integration, 
         we offer a comprehensive web development solution.
       </Description>
-      <GridContainer>
-        {words.map(word => (
-          <GridItem key={word}>
-            {word}
-            <Underline />
-          </GridItem>
-        ))}
-      </GridContainer>
+      <motion.div
+        ref={gridRef}
+        variants={gridContainerVariants}
+        initial="hidden"
+        animate={gridControls}
+      >
+        <GridContainer>
+          {words.map(word => (
+            <motion.div key={word} variants={gridItemVariants}>
+              <GridItem>
+                {word}
+                <Underline />
+              </GridItem>
+            </motion.div>
+          ))}
+        </GridContainer>
+      </motion.div>
     </Container>
     </motion.div>
   );

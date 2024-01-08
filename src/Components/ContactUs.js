@@ -1,5 +1,7 @@
-import React, { forwardRef, useRef, useState } from 'react';
+import React, { forwardRef, useRef, useState, useEffect } from 'react';
 import emailjs from 'emailjs-com';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 import styled from 'styled-components';
 
@@ -10,7 +12,7 @@ const Container = styled.div`
 `
 
 const ContactForm = styled.form`
-  max-width: 700px;
+  max-width: 900px;
   margin: auto;
   padding: 40px;
   
@@ -67,7 +69,8 @@ const TextArea = styled.textarea`
 const Button3D = styled.button`
   background-color: #E02424;
   border: none;
-  padding: 18px 325px;
+  width: 100%;
+  height: 60px;
   font-size: 20px; 
   border-radius: 5px; 
   cursor: pointer;
@@ -202,7 +205,14 @@ const SubmittedFormData = styled.div`
 `;
 
 
-
+const fadeInUpVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: 'easeOut' }
+  }
+};
 
 const ContactUs = forwardRef((props, ref) => {
   const form = useRef();
@@ -232,39 +242,63 @@ const ContactUs = forwardRef((props, ref) => {
       });
   };
 
-  return (
-    <Container ref={ref}>
-      <Title>Contact Us</Title>
-      <SmallText>We're here to help with any inquiries or feedback you have</SmallText>
-      {!isSubmitted ? (
-        <ContactForm ref={form} onSubmit={sendEmail}>
-          <FieldContainer>
-            <Input type="text" name="user_name" placeholder="Name" disabled={isLoading} />
-          </FieldContainer>
-          <FieldContainer>
-            <Input type="email" name="user_email" placeholder="Email" disabled={isLoading} />
-          </FieldContainer>
-          <TextArea name="user_message" placeholder="Message" disabled={isLoading}></TextArea>
-          <Button3D type="submit" disabled={isLoading}>Submit</Button3D>
-        </ContactForm>
-      ) : (
-        <SubmittedFormContainer>
-          <SubmittedFormField>
-            <SubmittedFormLabel>Name:</SubmittedFormLabel>
-            <SubmittedFormData>{formData.name}</SubmittedFormData>
-          </SubmittedFormField>
-          <SubmittedFormField>
-            <SubmittedFormLabel>Email:</SubmittedFormLabel>
-            <SubmittedFormData>{formData.email}</SubmittedFormData>
-          </SubmittedFormField>
-          <SubmittedFormField>
-            <SubmittedFormLabel>Message:</SubmittedFormLabel>
-            <SubmittedFormData>{formData.message}</SubmittedFormData>
-          </SubmittedFormField>
-        </SubmittedFormContainer>
-      )}
-    </Container>
-  );
-});
+  const formControls = useAnimation();
+  const [formRef, formInView] = useInView({ triggerOnce: true, threshold: 0.3 });
+
+  useEffect(() => {
+    if (formInView) {
+      formControls.start('visible');
+    }
+  }, [formControls, formInView]);
+
+  
+    return (
+      <Container ref={ref}>
+        <Title>Contact Us</Title>
+        <SmallText>We're here to help with any inquiries or feedback you have</SmallText>
+        {!isSubmitted ? (
+          <motion.div
+            ref={formRef}
+            initial="hidden"
+            animate={formControls}
+            variants={fadeInUpVariants}
+          >
+            <ContactForm onSubmit={sendEmail} ref={form}>
+              <FieldContainer>
+                <Input type="text" name="user_name" placeholder="Name" disabled={isLoading} />
+              </FieldContainer>
+              <FieldContainer>
+                <Input type="email" name="user_email" placeholder="Email" disabled={isLoading} />
+              </FieldContainer>
+              <TextArea name="user_message" placeholder="Message" disabled={isLoading}></TextArea>
+              <Button3D type="submit" disabled={isLoading}>Submit</Button3D>
+            </ContactForm>
+          </motion.div>
+        ) : (
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={fadeInUpVariants}
+          >
+            <SubmittedFormContainer>
+              <SubmittedFormField>
+                <SubmittedFormLabel>Name:</SubmittedFormLabel>
+                <SubmittedFormData>{formData.name}</SubmittedFormData>
+              </SubmittedFormField>
+              <SubmittedFormField>
+                <SubmittedFormLabel>Email:</SubmittedFormLabel>
+                <SubmittedFormData>{formData.email}</SubmittedFormData>
+              </SubmittedFormField>
+              <SubmittedFormField>
+                <SubmittedFormLabel>Message:</SubmittedFormLabel>
+                <SubmittedFormData>{formData.message}</SubmittedFormData>
+              </SubmittedFormField>
+            </SubmittedFormContainer>
+          </motion.div>
+        )}
+      </Container>
+    );
+  });
+  
 
 export default ContactUs;
