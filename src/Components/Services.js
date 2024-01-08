@@ -1,5 +1,6 @@
-import React, { forwardRef } from 'react';
-
+import React, { forwardRef, useEffect } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -18,12 +19,12 @@ const Container = styled.div`
   } 
 `;
 
-const Description = styled.div`
+const Description = styled(motion.div)`
   padding: 35px;
   font-size: 4vw;
   font-weight: 300;
   letter-spacing: 1px;
-  max-width: 1500px; 
+  
   text-align: justify;
   margin: auto;
   margin-top: 100px;
@@ -63,14 +64,13 @@ const ImageContainer = styled.div`
   } 
 `;
 
-const StyledImage = styled.img`
+const StyledImage = styled(motion.img)`
   height: 120px;
   width: auto;
   @media (max-width: 1000px) {
     display: none;
   } 
 `;
-
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -109,7 +109,7 @@ const TitleArea = styled.div`
   font-weight: 300;
   letter-spacing: 1px;
   text-align: center;
-  max-width: 1500px; 
+   
   margin: auto;
   margin-bottom: 100px;
   @media (max-width: 1000px) {
@@ -129,7 +129,60 @@ const Services = forwardRef((props, ref) => {
     "Efficient Systems", "Custom Coding", "Web Apps",
     "Smart Solutions", "Secure Payments", "Complete Service"
   ];
+
+
+
+  const containerVariants = {
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: { 
+      scale: 1,
+      opacity: 1,
+      transition: { duration: 0.5 }
+    }
+  };
+
+  const imageVariants = {
+    hiddenLeft: { x: -100, opacity: 0 },
+    hiddenRight: { x: 100, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 120,
+        damping: 20,
+        delay: 0.1,
+      }
+    }
+  };
+  
+  
+  const controls = useAnimation();
+  const [descriptionRef, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+  }, [controls, inView]);
+
+  const descriptionVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { duration: 0.8, ease: 'easeOut' }
+    }
+  };
+  
   return (
+
+    <motion.div 
+    ref={ref}
+    variants={containerVariants}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true }}
+  >
     <Container ref={ref}>
     <TitleArea>
         <BoldText>Website Design & Development</BoldText><br />
@@ -138,13 +191,53 @@ const Services = forwardRef((props, ref) => {
         Efficient, <StrikethroughText>Existential Worries</StrikethroughText>
       </TitleArea>
       <ImageContainer>
-        <StyledImage src="/images/aws-svgrepo-com.png" alt="AWS" />
-        <StyledImage src="/images/nodejs-svgrepo-com.png" alt="Node.js" />
-        <StyledImage src="/images/php02-svgrepo-com.png" alt="PHP" />
-        <StyledImage src="/images/python-svgrepo-com.png" alt="Python" />
-        <StyledImage src="/images/stripe-svgrepo-com.png" alt="Stripe" />
-      </ImageContainer>
-      <Description>
+  <StyledImage 
+    src="/images/aws-svgrepo-com.png" 
+    alt="AWS" 
+    variants={imageVariants}
+    initial="hiddenLeft"
+    whileInView="visible"
+    viewport={{ once: true }}
+  />
+  <StyledImage 
+    src="/images/nodejs-svgrepo-com.png" 
+    alt="Node.js" 
+    variants={imageVariants}
+    initial="hiddenRight"
+    whileInView="visible"
+    viewport={{ once: true }}
+  />
+  <StyledImage 
+    src="/images/php02-svgrepo-com.png" 
+    alt="PHP" 
+    variants={imageVariants}
+    initial="hiddenLeft"
+    whileInView="visible"
+    viewport={{ once: true }}
+  />
+  <StyledImage 
+    src="/images/python-svgrepo-com.png" 
+    alt="Python" 
+    variants={imageVariants}
+    initial="hiddenRight"
+    whileInView="visible"
+    viewport={{ once: true }}
+  />
+  <StyledImage 
+    src="/images/stripe-svgrepo-com.png" 
+    alt="Stripe" 
+    variants={imageVariants}
+    initial="hiddenLeft"
+    whileInView="visible"
+    viewport={{ once: true }}
+  />
+</ImageContainer>
+       <Description
+          ref={descriptionRef}
+          initial="hidden"
+          animate={controls}
+          variants={descriptionVariants}
+        >
         We specialize in creating custom websites, tailored to your specific needs, 
         with robust web hosting on platforms like <SemiBoldText>AWS</SemiBoldText>. Our focus is 
         on <SemiBoldText>SEO</SemiBoldText> and page speed optimization. With expertise in <SemiBoldText>MySQL</SemiBoldText>,{' '}
@@ -161,6 +254,7 @@ const Services = forwardRef((props, ref) => {
         ))}
       </GridContainer>
     </Container>
+    </motion.div>
   );
 });
 
