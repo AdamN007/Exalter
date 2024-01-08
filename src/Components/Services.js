@@ -1,6 +1,7 @@
-import React, { forwardRef } from 'react';
-
+import React, { useState, useEffect, forwardRef } from 'react';
 import styled from 'styled-components';
+
+
 
 const Container = styled.div`
   margin-left: 80px;
@@ -131,15 +132,50 @@ const TitleArea = styled.div`
   margin-bottom: 100px;
   @media (max-width: 1000px) {
     margin-bottom: 10px;
+    font-size: 6vw;
+  }
+  @media (max-width: 750px) {
+    margin-bottom: 10px;
+    font-size: 5vw;
+  }
+  @media (max-width: 350px) {
+    margin-bottom: 10px;
+    font-size: 7vw;
   }
 `;
 const StrikethroughText = styled(BoldText)`
   text-decoration: line-through;
 `;
 
+const useWindowSize = () => {
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Call handler right away so state gets updated with initial window size
+    handleResize();
+
+    // Remove event listener on cleanup
+    return () => window.removeEventListener('resize', handleResize);
+  }, []); // Empty array ensures that effect is only run on mount and unmount
+
+  return windowSize;
+};
 
 
 const Services = forwardRef((props, ref) => {
+  const size = useWindowSize();
+  const isMobile = size.width <= 350;
+  
   const words = [
     "Website Creation", "Reliable Hosting", "Boost Your Visibility",
     "Fast Load Times", "Data Management", "Interactive Designs",
@@ -148,12 +184,22 @@ const Services = forwardRef((props, ref) => {
   ];
   return (
     <Container ref={ref}>
-    <TitleArea>
-        <BoldText>Website Design & Development</BoldText><br />
-        Brand Identity, <BoldText>Custom Design &<br />
-        Development,</BoldText> Advertising, <BoldText>UI/UX</BoldText><br />
-        Efficient, <StrikethroughText>Existential Worries</StrikethroughText>
-      </TitleArea>
+    {isMobile ? (
+        <TitleArea>
+        <BoldText>Website Design & Development </BoldText>
+          Brand Identity, <BoldText>Custom Design &
+          Development,</BoldText> Advertising, <BoldText>UI/UX</BoldText>
+          Efficient, <StrikethroughText>Existential Worries</StrikethroughText>
+        </TitleArea>
+      ) : (
+        <TitleArea>
+          {/* Your default text area */}
+          <BoldText>Website Design & Development</BoldText><br />
+          Brand Identity, <BoldText>Custom Design &<br />
+          Development,</BoldText> Advertising, <BoldText>UI/UX</BoldText><br />
+          Efficient, <StrikethroughText>Existential Worries</StrikethroughText>
+        </TitleArea>
+      )}
       <ImageContainer>
         <StyledImage src="/images/aws-svgrepo-com.png" alt="AWS" />
         <StyledImage src="/images/nodejs-svgrepo-com.png" alt="Node.js" />

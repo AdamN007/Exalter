@@ -56,7 +56,10 @@ const BoxDescription = styled.div`
   font-size: 20px; 
    font-weight: 300;
    letter-spacing: 1px;
+   min-height: 150px;
+    max-height: 150px;
    @media (max-width: 1450px) {
+    min-height: 150px;
     max-height: 150px;
    }
 `;
@@ -86,7 +89,7 @@ const Button3D = styled.button`
 
   @media (max-width: 1400px) {
     padding: 18px 0px;
-    width: 60%;
+    width: 80%;
     text-align: center;
    }
    @media (max-width: 1000px) {
@@ -179,7 +182,7 @@ const Prices = forwardRef(({ contactRef }, ref) => {
         <BoxTitle>Ecommerce <br />Store</BoxTitle>
         <HorizontalLine />
         <BoxDescription>
-         An Ecommerce store with payment functionality, Home page, 5 other pages and a contact page including a contact form. Ideal for businesses looking to sell online.
+         An Ecommerce store with payment functionality, 5 other pages and a contact page including a contact form. Ideal for businesses looking to sell online.
         </BoxDescription>
         <Pricing>€2000</Pricing>
         
