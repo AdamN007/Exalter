@@ -1,4 +1,6 @@
-import React, { useState, useEffect, forwardRef } from 'react';
+import React, { forwardRef, useEffect } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
 
 
@@ -18,12 +20,12 @@ const Container = styled.div`
   } 
 `;
 
-const Description = styled.div`
+const Description = styled(motion.div)`
   padding: 35px;
   font-size: 3vw;
   font-weight: 300;
   letter-spacing: 1px;
-  max-width: 1500px; 
+  max-width: 2500px;
   text-align: justify;
   margin: auto;
   margin-top: 100px;
@@ -68,7 +70,7 @@ const ImageContainer = styled.div`
   } 
 `;
 
-const StyledImage = styled.img`
+const StyledImage = styled(motion.img)`
   height: 120px;
   width: auto;
   @media (max-width: 1400px) {
@@ -88,13 +90,12 @@ const StyledImage = styled.img`
   }
 
 `;
-
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 60px; 
+  grid-gap: 80px; 
   padding: 40px;
-  max-width: 1150px;
+  max-width: 2500px;
   margin: 40px auto;
   @media (max-width: 1000px) {
     display: none;
@@ -105,7 +106,7 @@ const GridItem = styled.div`
   text-align: left;
   position: relative;
   padding-left: 0px; 
-  font-size: 2vw; 
+  font-size: 1.5vw; 
   font-weight: 300;
   @media (max-width: 1000px) {
     display: none;
@@ -127,7 +128,7 @@ const TitleArea = styled.div`
   font-weight: 300;
   letter-spacing: 1px;
   text-align: center;
-  max-width: 1500px; 
+   
   margin: auto;
   margin-bottom: 100px;
   @media (max-width: 1000px) {
@@ -171,6 +172,60 @@ const useWindowSize = () => {
   return windowSize;
 };
 
+const containerVariants = {
+  hidden: { scale: 0.8, opacity: 0 },
+  visible: { 
+    scale: 1,
+    opacity: 1,
+    transition: { duration: 0.5 }
+  }
+};
+
+const imageVariants = {
+  hiddenLeft: { x: -100, opacity: 0 },
+  hiddenRight: { x: 100, opacity: 0 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 120,
+      damping: 20,
+      delay: 0.1,
+    }
+  }
+};
+
+
+const gridItemVariants = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: { 
+    opacity: 1, 
+    scale: 1, 
+    transition: { duration: 0.3, ease: 'easeOut' }
+  }
+};
+
+// Define animation variants for the grid container
+const gridContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1, // Stagger the animation of children
+      duration: 0.5
+    }
+  }
+};
+
+const slideInVariants = {
+  hidden: { x: -100, opacity: 0 },  // Starting from left
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: { duration: 0.5, ease: 'easeOut' }
+  }
+};
 
 const Services = forwardRef((props, ref) => {
   const size = useWindowSize();
@@ -182,7 +237,43 @@ const Services = forwardRef((props, ref) => {
     "Efficient Systems", "Custom Coding", "Web Apps",
     "Smart Solutions", "Secure Payments", "Complete Service"
   ];
+
+
+
+  
+  
+  
+  const descriptionControls = useAnimation();
+  const [descriptionRef, descriptionInView] = useInView({ triggerOnce: true, threshold: 0.3 });
+
+  useEffect(() => {
+    if (descriptionInView) {
+      descriptionControls.start('visible');
+    }
+  }, [descriptionControls, descriptionInView]);
+
+
+ 
+
+  const gridControls = useAnimation();
+  const [gridRef, gridInView] = useInView({ triggerOnce: true, threshold: 0.3 });
+
+  useEffect(() => {
+    if (gridInView) {
+      gridControls.start('visible');
+    }
+  }, [gridControls, gridInView]);
+
+
   return (
+
+    <motion.div 
+    ref={ref}
+    variants={containerVariants}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true }}
+  >
     <Container ref={ref}>
     {isMobile ? (
         <TitleArea>
@@ -201,13 +292,53 @@ const Services = forwardRef((props, ref) => {
         </TitleArea>
       )}
       <ImageContainer>
-        <StyledImage src="/images/aws-svgrepo-com.png" alt="AWS" />
-        <StyledImage src="/images/nodejs-svgrepo-com.png" alt="Node.js" />
-        <StyledImage src="/images/php02-svgrepo-com.png" alt="PHP" />
-        <StyledImage src="/images/python-svgrepo-com.png" alt="Python" />
-        <StyledImage src="/images/stripe-svgrepo-com.png" alt="Stripe" />
-      </ImageContainer>
-      <Description>
+  <StyledImage 
+    src="/images/aws-svgrepo-com.png" 
+    alt="AWS" 
+    variants={imageVariants}
+    initial="hiddenLeft"
+    whileInView="visible"
+    viewport={{ once: true }}
+  />
+  <StyledImage 
+    src="/images/nodejs-svgrepo-com.png" 
+    alt="Node.js" 
+    variants={imageVariants}
+    initial="hiddenRight"
+    whileInView="visible"
+    viewport={{ once: true }}
+  />
+  <StyledImage 
+    src="/images/php02-svgrepo-com.png" 
+    alt="PHP" 
+    variants={imageVariants}
+    initial="hiddenLeft"
+    whileInView="visible"
+    viewport={{ once: true }}
+  />
+  <StyledImage 
+    src="/images/python-svgrepo-com.png" 
+    alt="Python" 
+    variants={imageVariants}
+    initial="hiddenRight"
+    whileInView="visible"
+    viewport={{ once: true }}
+  />
+  <StyledImage 
+    src="/images/stripe-svgrepo-com.png" 
+    alt="Stripe" 
+    variants={imageVariants}
+    initial="hiddenLeft"
+    whileInView="visible"
+    viewport={{ once: true }}
+  />
+</ImageContainer>
+        <Description
+          ref={descriptionRef}
+          initial="hidden"
+          animate={descriptionControls}
+          variants={containerVariants} // Reusing containerVariants for Description
+        >
         We specialize in creating custom websites, tailored to your specific needs, 
         with robust web hosting on platforms like <SemiBoldText>AWS</SemiBoldText>. Our focus is 
         on <SemiBoldText>SEO</SemiBoldText> and page speed optimization. With expertise in <SemiBoldText>MySQL</SemiBoldText>,{' '}
@@ -215,15 +346,25 @@ const Services = forwardRef((props, ref) => {
         <SemiBoldText>JavaScript</SemiBoldText>, <SemiBoldText>Python</SemiBoldText>, and <SemiBoldText>Stripe</SemiBoldText> integration, 
         we offer a comprehensive web development solution.
       </Description>
-      <GridContainer>
-        {words.map(word => (
-          <GridItem key={word}>
-            {word}
-            <Underline />
-          </GridItem>
-        ))}
-      </GridContainer>
+      <motion.div
+        ref={gridRef}
+        variants={gridContainerVariants}
+        initial="hidden"
+        animate={gridControls}
+      >
+        <GridContainer>
+          {words.map(word => (
+            <motion.div key={word} variants={gridItemVariants}>
+              <GridItem>
+                {word}
+                <Underline />
+              </GridItem>
+            </motion.div>
+          ))}
+        </GridContainer>
+      </motion.div>
     </Container>
+    </motion.div>
   );
 });
 

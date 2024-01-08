@@ -18,15 +18,17 @@ const Container = styled.div`
 
 const TitleDescription = styled.div`
   text-align: center;
-  font-size: 75px;
+  font-size: 5vw;
   @media (max-width: 1000px) {
     font-size: 50px;
   }
+
+  
 `;
 
 const Subtitle = styled.div`
   min-height: 80px;
-  font-size: 70px;
+  font-size: 5vw;
   @media (max-width: 1000px) {
     font-size: 50px;
   }
@@ -54,6 +56,11 @@ const Description = styled.div`
     font-size: 18px;
     max-width: 400px;
   }
+
+  @media (min-width: 2000px) {
+    font-size: 27px;
+    max-width: 900px;
+  }
 `;
 
 const UnderlinedText = styled.span`
@@ -67,7 +74,8 @@ const UnderlinedText = styled.span`
 const Button3D = styled.button`
   background-color: #E02424; 
   border: none;
-  padding: 18px 45px; 
+  width: 15%;
+  height: 60px;
   font-size: 18px;
   border-radius: 5px; 
   cursor: pointer;

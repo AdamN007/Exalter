@@ -1,10 +1,14 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import styled from 'styled-components';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 const Wrapper = styled.div`
 margin-bottom: 100px;
+margin-top: 100px;
 @media (max-width: 1000px) {
   margin-bottom: 100px;
+
   }
 `;
 const BoxContainer = styled.div`
@@ -24,7 +28,7 @@ const BoxContainer = styled.div`
 
 const Box = styled.div`
   
-  max-width: 500px; 
+  max-width: 800px; 
   height: 640px;
   border-top: 2px solid black;
   border-bottom: 2px solid black;
@@ -47,7 +51,7 @@ const BoxTitle = styled.div`
 const HorizontalLine = styled.div`
   height: 1px; 
   background-color: black; 
-  width: 85%; 
+  width: 95%; 
   margin: 10px auto;
 `;
 
@@ -150,6 +154,15 @@ const SmallText = styled.div`
 
 `;
 
+const boxVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: 'easeOut' }
+  }
+};
+
 
 const Prices = forwardRef(({ contactRef }, ref) => {
 
@@ -158,53 +171,81 @@ const Prices = forwardRef(({ contactRef }, ref) => {
       contactRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+
+  const controls = useAnimation();
+  const [boxRef, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+  }, [controls, inView]);
   return (
    <Wrapper ref={ref}>
    <Title>The Plans</Title>
    <SmallText> Transparent, flexible payment options to suit your needs.
 
 </SmallText>
-    <BoxContainer>
-   
-      <Box>
-        <BoxTitle>Basic <br />Website</BoxTitle>
-        <HorizontalLine />
-        <BoxDescription>
-          A basic infromational website with a Home page, 3 other pages and a contact page including a contact form. Ideal for small businesses or self employed.
-        </BoxDescription>
-        <Pricing>€1000 </Pricing>
-        <HorizontalLine />
-        <ButtonContainer>
-        <Button3D onClick={scrollToContact}>Contact Us</Button3D>
-        </ButtonContainer>
-      </Box>
-      <Box>
-        <BoxTitle>Ecommerce <br />Store</BoxTitle>
-        <HorizontalLine />
-        <BoxDescription>
-         An Ecommerce store with payment functionality, 5 other pages and a contact page including a contact form. Ideal for businesses looking to sell online.
-        </BoxDescription>
-        <Pricing>€2000</Pricing>
-        
-        <HorizontalLine />
-        <ButtonContainer>
-        <Button3D onClick={scrollToContact}>Contact Us</Button3D>
-        </ButtonContainer>
-      </Box>
-      <Box>
-        <BoxTitle>Custom <br /> Solution</BoxTitle>
-        <HorizontalLine />
-        <BoxDescription>
-          A custom order, our other options dont meet your needs?, descripe your websites needs and get a free quote within 24 hours. Ideal for everyone :)
-        </BoxDescription>
-        <Pricing>€???</Pricing>
-        
-        <HorizontalLine />
-        <ButtonContainer>
-        <Button3D onClick={scrollToContact}>Contact Us</Button3D>
-        </ButtonContainer>
-      </Box>
-    </BoxContainer>
+     <BoxContainer>
+        <motion.div
+          ref={boxRef}
+          initial="hidden"
+          animate={controls}
+          variants={boxVariants}
+        >
+          <Box>
+            <BoxTitle>Basic <br />Website</BoxTitle>
+            <HorizontalLine />
+            <BoxDescription>
+              A basic informational website with a Home page, 3 other pages, and a contact page including a contact form. Ideal for small businesses or self-employed.
+            </BoxDescription>
+            <Pricing>€1000</Pricing>
+            <HorizontalLine />
+            <ButtonContainer>
+              <Button3D onClick={scrollToContact}>Contact Us</Button3D>
+            </ButtonContainer>
+          </Box>
+        </motion.div>
+        <motion.div
+          ref={boxRef}
+          initial="hidden"
+          animate={controls}
+          variants={boxVariants}
+        >
+          <Box>
+            <BoxTitle>Ecommerce <br />Store</BoxTitle>
+            <HorizontalLine />
+            <BoxDescription>
+              An Ecommerce store with payment functionality, Home page, 5 other pages, and a contact page including a contact form. Ideal for businesses looking to sell online.
+            </BoxDescription>
+            <Pricing>€2000</Pricing>
+            <HorizontalLine />
+            <ButtonContainer>
+              <Button3D onClick={scrollToContact}>Contact Us</Button3D>
+            </ButtonContainer>
+          </Box>
+        </motion.div>
+        <motion.div
+          ref={boxRef}
+          initial="hidden"
+          animate={controls}
+          variants={boxVariants}
+        >
+          <Box>
+            <BoxTitle>Custom <br />Solution</BoxTitle>
+            <HorizontalLine />
+            <BoxDescription>
+              A custom order, our other options don't meet your needs? Describe your website's needs and get a free quote within 24 hours. Ideal for everyone :)
+            </BoxDescription>
+            <Pricing>€???</Pricing>
+            <HorizontalLine />
+            <ButtonContainer>
+              <Button3D onClick={scrollToContact}>Contact Us</Button3D>
+            </ButtonContainer>
+          </Box>
+        </motion.div>
+      </BoxContainer>
     </Wrapper>
   );
 });
