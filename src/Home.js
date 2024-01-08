@@ -50,7 +50,7 @@ const Home = () => {
         pricingRef={pricingRef}
         contactRef={contactRef}
       />
-      <Header ref={homeRef} id="home"></Header>
+      <Header ref={homeRef} servicesRef={servicesRef} id="home"></Header>
       <Services ref={servicesRef} id="services"/>
       
 <Prices ref={pricingRef} contactRef={contactRef} id="pricing"/>

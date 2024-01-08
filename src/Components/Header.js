@@ -137,7 +137,7 @@ const ArrowIcon = styled(ArrowIosUpwardOutline)`
 
 
 
-const Header = forwardRef((props, ref) => {
+const Header = forwardRef((props, ref, servicesRef) => {
   const el = useRef(null);
 
   const containerVariants = {
@@ -174,26 +174,6 @@ const Header = forwardRef((props, ref) => {
     }
   };
   
-  // Define animation variants for the grid container
-  const gridContainerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1, // Stagger the animation of children
-        duration: 1
-      }
-    }
-  };
-  
-  const slideInVariants = {
-    hidden: { x: -100, opacity: 0 },  // Starting from left
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: { duration: 1, ease: 'easeOut' }
-    }
-  };
 
   const descriptionControls = useAnimation();
   const [descriptionRef, descriptionInView] = useInView({ triggerOnce: true, threshold: 0.3 });
@@ -204,6 +184,26 @@ const Header = forwardRef((props, ref) => {
     }
   }, [descriptionControls, descriptionInView]);
   
+  const handleMenuLinkClick = () => {
+    // Make sure servicesRef is defined and is passed as a prop to Header
+    if (props.servicesRef && props.servicesRef.current) {
+      scrollToSection(props.servicesRef);
+    }
+  };
+
+  const scrollToSection = (sectionRef) => {
+    if (sectionRef.current) {
+      const offset = 100; // Adjust this value as needed
+      const sectionPosition = sectionRef.current.getBoundingClientRect().top;
+      const offsetPosition = sectionPosition + window.pageYOffset - offset;
+  
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
 
   useEffect(() => {
     const typed = new Typed(el.current, {
@@ -224,7 +224,7 @@ const Header = forwardRef((props, ref) => {
   return (
     <motion.div 
     ref={ref}
-    variants={slideInVariants}
+    variants={gridItemVariants}
     initial="hidden"
     whileInView="visible"
     viewport={{ once: true }}
@@ -238,7 +238,7 @@ const Header = forwardRef((props, ref) => {
       <Description>
   An <UnderlinedText>acclaimed design and development agency</UnderlinedText> renowned for bringing highly innovative ideas to life <UnderlinedText>quickly enough to ward off any encroaching existential worries</UnderlinedText>.
 </Description>
-    <Button3D>Learn More</Button3D>
+    <Button3D onClick={() => handleMenuLinkClick(servicesRef)} >Learn More</Button3D>
     
     </Container>
     </motion.div>
