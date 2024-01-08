@@ -6,10 +6,17 @@ const Wrapper = styled.div`
 margin-bottom: 100px;
 margin-top: 100px;
 @media (max-width: 1000px) {
-  margin-bottom: 100px;
+  margin-top: 70px;
 
   }
+
+  @media (max-width: 700px) {
+  margin-top: 50px;
+margin-bottom: 70px;
+  }
 `;
+
+
 const BoxContainer = styled.div`
   display: flex;
   justify-content: center;
