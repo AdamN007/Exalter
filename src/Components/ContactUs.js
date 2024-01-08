@@ -39,6 +39,10 @@ const FieldContainer = styled.div`
   @media (min-width: 1001px) {
     
   }
+
+  @media (max-width: 700px) {
+    width: 105%;
+  }
 `;
 
 const Input = styled.input`
@@ -90,6 +94,10 @@ const Button3D = styled.button`
     width: 100%;
   }
 
+  @media (max-width: 700px) {
+    
+    width: 105%;
+  }
   color: white; /* or any color you want for the text */
   text-decoration: none; /* Removes the underline from links */
   
