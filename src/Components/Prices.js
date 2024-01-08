@@ -78,8 +78,10 @@ const Pricing = styled.div`
   font-size: 45px;
   font-family: 'Arapey', serif;
   margin-top: 40px;
-  padding-left: 45px;
-  
+  padding-left: 35px;
+   @media (max-width: 1000px) {
+    padding-left: 35px;
+   }
   
 `;
 
@@ -160,6 +162,14 @@ const SmallText = styled.div`
 
 `;
 
+const boxVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1, ease: 'easeOut' }
+  }
+};
 
 
 const Prices = forwardRef(({ contactRef }, ref) => {

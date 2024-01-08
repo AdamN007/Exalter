@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef, forwardRef  } from 'react';
 import styled from 'styled-components';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import Typed from 'typed.js';
 import { ArrowIosUpwardOutline } from '@styled-icons/evaicons-outline/ArrowIosUpwardOutline';
 
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -81,6 +83,9 @@ const Button3D = styled.button`
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 45px;
+  @media (max-width: 1500px) {
+    width: 200px;
+  }
 
 
   box-shadow: 
@@ -134,6 +139,70 @@ const ArrowIcon = styled(ArrowIosUpwardOutline)`
 
 const Header = forwardRef((props, ref) => {
   const el = useRef(null);
+
+  const containerVariants = {
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: { 
+      scale: 1,
+      opacity: 1,
+      transition: { duration: 0.5 }
+    }
+  };
+  
+  const imageVariants = {
+    hiddenLeft: { x: -100, opacity: 0 },
+    hiddenRight: { x: 100, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 120,
+        damping: 20,
+        delay: 0.1,
+      }
+    }
+  };
+  
+  
+  const gridItemVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: { 
+      opacity: 1, 
+      scale: 1, 
+      transition: { duration: 1, ease: 'easeOut' }
+    }
+  };
+  
+  // Define animation variants for the grid container
+  const gridContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1, // Stagger the animation of children
+        duration: 1
+      }
+    }
+  };
+  
+  const slideInVariants = {
+    hidden: { x: -100, opacity: 0 },  // Starting from left
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: 1, ease: 'easeOut' }
+    }
+  };
+
+  const descriptionControls = useAnimation();
+  const [descriptionRef, descriptionInView] = useInView({ triggerOnce: true, threshold: 0.3 });
+
+  useEffect(() => {
+    if (descriptionInView) {
+      descriptionControls.start('visible');
+    }
+  }, [descriptionControls, descriptionInView]);
   
 
   useEffect(() => {
@@ -153,6 +222,13 @@ const Header = forwardRef((props, ref) => {
   }, []);
 
   return (
+    <motion.div 
+    ref={ref}
+    variants={slideInVariants}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true }}
+  >
     <Container ref={ref}>
       <TitleDescription>
         Design &<br />
@@ -165,6 +241,7 @@ const Header = forwardRef((props, ref) => {
     <Button3D>Learn More</Button3D>
     
     </Container>
+    </motion.div>
   );
 });
 
