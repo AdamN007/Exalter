@@ -59,19 +59,33 @@ const ImageContainer = styled.div`
   max-width: 1800px;
   margin: auto;
   @media (max-width: 1400px) {
-    display: none;
+    
   } 
   @media (max-width: 1000px) {
-    display: none;
+    margin-left: 5%;
+    margin-right: 5%;
   } 
 `;
 
 const StyledImage = styled.img`
   height: 120px;
   width: auto;
-  @media (max-width: 1000px) {
-    display: none;
+  @media (max-width: 1400px) {
+    height: 100px;
   } 
+  @media (max-width: 1000px) {
+    height: 80px;
+  } 
+  @media (max-width: 700px) {
+    height: 60px;
+  }
+  @media (max-width: 500px) {
+    height: 40px;
+  }
+  @media (max-width: 300px) {
+    height: 30px;
+  }
+
 `;
 
 const GridContainer = styled.div`
