@@ -131,6 +131,9 @@ const TitleArea = styled.div`
    
   margin: auto;
   margin-bottom: 100px;
+  border-radius: 68px;
+  border-radius: 50px;
+
   @media (max-width: 1000px) {
     margin-bottom: 10px;
     font-size: 6vw;
@@ -144,6 +147,167 @@ const TitleArea = styled.div`
     font-size: 7vw;
   }
 `;
+
+const PreviousArea = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 35px;
+  font-size: 5vw;
+  font-weight: 300;
+  height: 33vw;
+  letter-spacing: 1px;
+  text-align: left;
+  margin: auto;
+  margin-bottom: 100px;
+  border-radius: 40px;  
+box-shadow: inset 2vw 2vw 3vw #505050,
+            inset -2vw -2vw 3vw #818181;
+
+  @media (max-width: 1000px) {
+    width: 80%;
+  }
+  @media (max-width: 750px) {
+    flex-direction: column;
+    height: 170vw;
+    padding: 20px; /* Adjust padding as needed */
+    font-size: 6vw; /* Adjust font size as needed */
+    justify-content: center; /* Center content vertically */
+    margin-bottom: 50px; /* Adjust bottom margin as needed */
+  }
+`;
+
+const TextContainer = styled.div`
+  width: 50%;
+  margin-right: 5vw;
+  margin-left: 5vw;
+  margin-bottom: 2.5vw;
+  @media (max-width: 750px) {
+    width: 80%; /* Adjust width as needed for smaller screens */
+    margin-right: 10%; /* Center the text container */
+    margin-left: 10%;
+    margin-bottom: 1vw;
+  }
+  /* Additional styling for text if needed */
+`;
+
+const TopText = styled.div`
+  font-size: 3vw;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-align: left;
+  margin-bottom: 1vw;
+  @media (max-width: 750px) {
+    font-size: 6vw; /* Adjust font size as needed */
+    text-align: center; /* Center the text container */
+    margin-top: 3vw; /* Adjust bottom margin as needed */
+  }
+`;
+
+const UnderText = styled.div`
+  font-size: 1.5vw;
+  font-weight: 300;
+  text-align: left;
+  @media (max-width: 750px) {
+    font-size:4vw; /* Adjust font size as needed */
+    text-align: left; /* Center the text container */
+    margin-top: 3vw; /* Adjust bottom margin as needed */
+  }
+`;
+
+const ViewText = styled.div`
+  margin-top: 1vh;
+  font-size: 1vw;
+  font-weight: 300;
+  text-align: left;
+  margin-bottom: 1vw;
+  @media (max-width: 750px) {
+    font-size:4vw; /* Adjust font size as needed */
+    text-align: center; /* Center the text container */
+    margin-top: 3vw; /* Adjust bottom margin as needed */
+  }
+`;
+
+const Button3D = styled.a`
+  position: absolute;
+  display: inline-block;
+  background-color: #E02424; 
+  border: none;
+  padding: 1vw 5vw; 
+  font-size: 1vw; 
+  border-radius: 5px; 
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white; /* or any color you want for the text */
+  text-decoration: none; /* Removes the underline from links */
+  
+
+  
+  &:link, &:visited, &:hover, &:active {
+    color: white; /* Ensures that the link color remains consistent */
+  }
+  @media (max-width: 750px) {
+    font-size: 4vw; /* Adjust font size as needed */
+    text-align: center; /* Center the text container */
+    padding: 3vw 15vw; 
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    right: 50%;
+    transform: translateX(50%);
+    margin-top: 2vw; /* Adjust bottom margin as needed */
+  }
+
+ 
+  box-shadow: 
+    0 8px #B71C1C, 
+    0 10px 10px rgba(0, 0, 0, 0.5); 
+
+  &:hover {
+    background-color: #C62828;
+  }
+
+  &:active {
+    box-shadow: 
+      0 4px #B71C1C,
+      0 5px 15px rgba(0, 0, 0, 0.5); 
+  }
+`;
+
+const ButtonContainer = styled.div`
+`;
+
+
+const BImageContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; 
+  max-width: 1800px;
+  margin: auto;
+  flex-wrap: wrap; // Allows the images to wrap to the next line on smaller screens
+  margin-right: 10vw;
+  @media (max-width: 1000px) {
+    justify-content: center; // Centers the images on smaller screens
+  }
+  @media (max-width: 750px) {
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    margin-bottom: 10vw;
+  }
+`;
+
+const BStyledImage = styled(motion.img)`
+  height: 25vw;
+  width: auto;
+  margin: 5px; // Adds a small margin around each image for spacing
+  @media (max-width: 750px) {
+    height: 60vw;
+  }
+`;
+
+
 const StrikethroughText = styled(BoldText)`
   text-decoration: line-through;
 `;
@@ -291,6 +455,20 @@ const Services = forwardRef((props, ref) => {
           Efficient, <StrikethroughText>Existential Worries</StrikethroughText>
         </TitleArea>
       )}
+      <PreviousArea>
+    <TextContainer>
+      <TopText>Web Development <br/>Simplified.</TopText>
+      <UnderText>Our web development approach focuses on <BoldText>coding custom solutions</BoldText> to deliver <BoldText>unique, fast,</BoldText> and <BoldText>user-friendly</BoldText> websites <BoldText>tailored</BoldText> specifically to your business needs. This ensures a standout online presence that <BoldText>engages</BoldText> and <BoldText>impresses your audience.</BoldText> </UnderText>
+
+        <ViewText>View our most recent work </ViewText>
+          <Button3D href="https://bleue-belle.com/" target="_blank" rel="noopener noreferrer">View</Button3D>
+
+
+    </TextContainer>
+    <BImageContainer>
+      <BStyledImage src="/images/shutterstock_1454813456 [Converted].png" alt="Descriptive Alt Text" />
+    </BImageContainer>
+  </PreviousArea>
       <ImageContainer>
   <StyledImage 
     src="/images/aws-svgrepo-com.png" 

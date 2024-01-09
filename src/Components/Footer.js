@@ -98,12 +98,6 @@ const Footer = () => {
           <FooterText>
             Designed with <SmallImage src="/images/harp.png" alt="Big Ben" /> in Dublin, Ireland
           </FooterText>
-          <LogosContainer>
-          <InstagramLogo src="/images/instagram-svgrepo-com.png" alt="Instagram" />
-          <XLogo src="/images/twitter-x-logo-42562.png" alt="X" />
-            <LogoImage src="/images/linkedin-svgrepo-com.png" alt="LinkedIn" />
-            
-          </LogosContainer>
         </FooterContainer>
       </div>
     );
