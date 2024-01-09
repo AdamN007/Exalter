@@ -29,7 +29,7 @@ const TitleDescription = styled.div`
 `;
 
 const Subtitle = styled.div`
-  min-height: 80px;
+  min-height: 100px;
   font-size: 5vw;
   @media (max-width: 1000px) {
     font-size: 50px;
@@ -142,12 +142,13 @@ const Header = forwardRef((props, ref, servicesRef) => {
 
   const containerVariants = {
     hidden: { scale: 0.8, opacity: 0 },
-    visible: { 
+    visible: {
       scale: 1,
       opacity: 1,
-      transition: { duration: 0.5 }
+      transition: { duration: 0.5, ease: "easeOut" }
     }
   };
+  
   
   const imageVariants = {
     hiddenLeft: { x: -100, opacity: 0 },

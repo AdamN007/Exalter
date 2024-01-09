@@ -81,7 +81,7 @@ const StyledImage = styled(motion.img)`
   } 
   @media (max-width: 700px) {
     height: 60px;
-    margin: 10px; 
+    margin: 15px; 
   }
   @media (max-width: 500px) {
     height: 40px; // Adjusts the image height for extra small screens
@@ -547,3 +547,4 @@ const Services = forwardRef((props, ref) => {
 });
 
 export default Services;
+

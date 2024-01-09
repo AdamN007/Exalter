@@ -209,7 +209,9 @@ const SubmittedFormData = styled.div`
   justify-content: flex-start;
   text-align: left;
   white-space: pre-wrap; 
-  width: 100%; // Set width to fill the parent container
+  width: 100%;
+
+ 
 `;
 
 
