@@ -7,10 +7,17 @@ const Wrapper = styled.div`
 margin-bottom: 100px;
 margin-top: 100px;
 @media (max-width: 1000px) {
-  margin-bottom: 100px;
+  margin-top: 70px;
 
   }
+
+  @media (max-width: 700px) {
+  margin-top: 50px;
+margin-bottom: 70px;
+  }
 `;
+
+
 const BoxContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -60,7 +67,10 @@ const BoxDescription = styled.div`
   font-size: 20px; 
    font-weight: 300;
    letter-spacing: 1px;
+   min-height: 150px;
+    max-height: 150px;
    @media (max-width: 1450px) {
+    min-height: 150px;
     max-height: 150px;
    }
 `;
@@ -69,8 +79,10 @@ const Pricing = styled.div`
   font-size: 45px;
   font-family: 'Arapey', serif;
   margin-top: 40px;
-  padding-left: 45px;
-  
+  padding-left: 35px;
+   @media (max-width: 1000px) {
+    padding-left: 35px;
+   }
   
 `;
 
@@ -90,7 +102,7 @@ const Button3D = styled.button`
 
   @media (max-width: 1400px) {
     padding: 18px 0px;
-    width: 60%;
+    width: 80%;
     text-align: center;
    }
    @media (max-width: 1000px) {
@@ -156,9 +168,10 @@ const boxVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: 'easeOut' }
+    transition: { duration: 1, ease: 'easeOut' }
   }
 };
+
 
 
 const Prices = forwardRef(({ contactRef }, ref) => {

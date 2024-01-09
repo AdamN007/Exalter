@@ -108,6 +108,7 @@ const GridItem = styled.div`
   padding-left: 0px; 
   font-size: 1.5vw; 
   font-weight: 300;
+
   @media (max-width: 1000px) {
     display: none;
   } 
@@ -210,8 +211,9 @@ const UnderText = styled.div`
   text-align: left;
   @media (max-width: 750px) {
     font-size:4vw; /* Adjust font size as needed */
-    text-align: left; /* Center the text container */
+    text-align: justify; /* Center the text container */
     margin-top: 3vw; /* Adjust bottom margin as needed */
+
   }
 `;
 
@@ -235,6 +237,7 @@ const Button3D = styled.a`
   border: none;
   padding: 1vw 5vw; 
   font-size: 1vw; 
+  font-weight: 400;
   border-radius: 5px; 
   cursor: pointer;
   transition: all 0.3s ease;

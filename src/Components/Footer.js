@@ -31,10 +31,11 @@ const FooterText = styled.div`
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   font-size: 20px;
-
+  margin-right: 2.2vw;
   @media (max-width: 1000px) {
     font-size: 16px; /* Decrease font size */
     order: 0; /* Move text to the bottom */
+    margin-right: 0vw;
     margin-top: 10px; /* Add space above the footer text */
     margin-bottom: 40px;
   }
@@ -98,6 +99,12 @@ const Footer = () => {
           <FooterText>
             Designed with <SmallImage src="/images/harp.png" alt="Big Ben" /> in Dublin, Ireland
           </FooterText>
+          <LogosContainer>
+          <InstagramLogo src="" />
+          <XLogo src="" />
+            <LogoImage src=""  />
+            
+          </LogosContainer>
         </FooterContainer>
       </div>
     );
